@@ -1,1 +1,20 @@
-<p>developer works!</p>
+<div>
+  <button (click)="isNoteCreating=!isNoteCreating">Создание записи</button>
+  <div>
+    Список моих записей:
+    <div *ngFor="let note of authorNotes">
+      <div style="display: flex;flex-direction: row">
+        <div>{{note.title}}</div>
+        <div><button (click)="changeEditingNote(note)">Редактировать</button></div>
+        <div><button (click)="deleteNote(note)">Удалить</button></div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isNoteCreating">
+    <app-add-note></app-add-note>
+  </div>
+  <div *ngIf="isNoteEditing">
+    <app-edit-note></app-edit-note>
+  </div>
+</div>
+

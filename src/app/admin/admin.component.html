@@ -1,1 +1,97 @@
-<p>admin works!</p>
+<div>
+  <div>Админ-панель</div>
+  <div>
+    {{message}}<br>
+    <button (click)="isCreatingUser=true">Создание пользователя</button>
+    <div *ngIf="isCreatingUser">
+      <form>
+        <div>
+          <label>
+            <span>Никнэйм</span>
+            <input type="text" name="nickname" required [(ngModel)]="newUser.nickname">
+          </label>
+        </div>
+        <div>
+          <label>
+            <span>Имя</span>
+            <input type="text" name="name" required [(ngModel)]="newUser.name">
+          </label>
+        </div>
+        <div>
+          <label>
+            <span>Фамилия</span>
+            <input type="text" name="surname" required [(ngModel)]="newUser.surname">
+          </label>
+        </div>
+        <div>
+          <label>
+            <span>Email</span>
+            <input type="text" name="email" required [(ngModel)]="newUser.email">
+          </label>
+        </div>
+        <div>
+          <label>
+            <span>Пароль</span>
+            <input type="text" name="password" required [(ngModel)]="newUser.password">
+          </label>
+        </div>
+        <div>
+          <label>
+            <span>Роль</span>
+            <select [(ngModel)]="newUser.role" name="role">
+              <option *ngFor="let role of roles" [ngValue]="role">{{role.name}}</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label>
+            <span>Должность</span>
+            <select [(ngModel)]="newUser.position" name="position">
+              <option *ngFor="let position of positions" [ngValue]="position">{{position.name}}</option>
+            </select>
+          </label>
+        </div>
+        <button (click)="createUser()">Создать пользователя</button>
+      </form>
+    </div>
+    <button (click)="isAddingPosition=true">Управление должностями</button>
+    <button (click)="isTagEditing=true">Управление активными тегами</button>
+    <button (click)="isGamesAdding=true">Добавление игры</button>
+    <div *ngIf="isGamesAdding"><app-add-game></app-add-game></div>
+    <div>
+
+    </div>
+    <button (click)="isGamesEditing=true">Редактировать</button>
+    <div><span>Все должности</span>
+    <div *ngFor="let position of positions">
+      <div>{{position.name}}</div>
+    </div></div>
+    <br>
+    <div *ngIf="isAddingPosition">
+      Добавление должности
+      <form>
+        <div>
+          <label>
+            Название должности
+            <input type="text" name="position_name" [(ngModel)]="newPosition.positionName">
+          </label><br>
+          <label>
+            Системное название на английском, без специальных знаков
+            <input type="text" name="system_name" [(ngModel)]="newPosition.systemName">
+          </label>
+        </div>
+        <button (click)="addPosition()">
+          Добавить
+        </button>
+      </form>
+    </div>
+    <div *ngIf="isTagEditing">
+      <div *ngFor="let tag of fire.systemData.tags">
+        <div>{{tag.tagName}}</div>
+      </div>
+      <input type="text" [(ngModel)]="newTag" name="tag">
+      <button (click)="addTag(newTag)">Добавить тег</button>
+    </div>
+  </div>
+
+</div>

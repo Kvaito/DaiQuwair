@@ -1,0 +1,12 @@
+<div>
+  <form>
+    <input type="text" name="title" [(ngModel)]="game.gameTitle" placeholder="Заголовок">
+    <input type="text" name="title" [(ngModel)]="game.systemName" placeholder="Название в системе">
+    <div id="editor-js"></div>
+    <div  *ngIf="coverUploaded"><img style="width: 200px;height: 200px" [src]=fire.actualImageDownloadUrl></div>
+    <div><input type="file" (change)="uploadImage($event)" name="file" accept="*.png.jpg"></div>
+    <div>Введите жанры игры на английском через пробел
+      <input type="text" placeholder="Теги" name="genres" [(ngModel)]="genresRaw"></div>
+  </form>
+  <button (click)="createGame()">Добавить игру</button>
+</div>

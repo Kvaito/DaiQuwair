@@ -1,0 +1,15 @@
+.menu{
+background-color: #100923;
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+  padding: 10px;
+}
+
+.menu_item{
+  background-color: cadetblue;
+  margin-left: 10px;
+}
+.menu_item>a{
+  text-decoration: none;
+}

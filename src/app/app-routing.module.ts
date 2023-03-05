@@ -8,17 +8,21 @@ import {FaqComponent} from "./faq/faq.component";
 import {NoteComponent} from "./note/note.component";
 import {CareerComponent} from "./career/career.component";
 import {AdminComponent} from "./admin/admin.component";
+import {LoginComponent} from "./login/login.component";
+import {GamePageComponent} from "./game-page/game-page.component";
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {path:'news',component:NewsComponent},
   {path:'games',component:GamesComponent},
+  {path:'game-page',component:GamePageComponent},
   {path:'developer',component:DeveloperComponent},
   {path:'faq',component:FaqComponent},
   {path:'note',component:NoteComponent},
   {path:'note',component:NoteComponent},
   {path:'carrers',component:CareerComponent},
   {path:'admin',component:AdminComponent},
+  {path:'login',component:LoginComponent}
 ];
 
 @NgModule({

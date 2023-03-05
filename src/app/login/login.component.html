@@ -1,0 +1,19 @@
+<div>
+  <span>Вход для разработчика</span>
+  <div>
+    <div>
+      <label>
+        Почта
+        <input type="text" name="email" [(ngModel)]="email">
+      </label>
+    </div> <div>
+      <label>
+        Пароль
+        <input type="password" name="password" [(ngModel)]="password">
+      </label>
+    </div>
+    <div>
+      <button (click)="login()">Войти</button>
+    </div>
+  </div>
+</div>

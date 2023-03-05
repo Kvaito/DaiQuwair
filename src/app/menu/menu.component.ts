@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from "../auth.service";
+import {FireService} from "../fire.service";
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  isUserAuth:boolean=false
+  userName:string=''
+  constructor(private auth:AuthService,public fire:FireService) { }
 
   ngOnInit(): void {
+    if(this.auth.userIsReady){
+      if(this.auth.userAuthData!=={}){
+        this.isUserAuth=true
+        this.userName=this.auth.userAuthData.email.split('@')[0].toLowerCase()
+      }
+    }
   }
+
 
 }

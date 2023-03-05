@@ -1,0 +1,7 @@
+.gameBlock{
+
+}
+.gameBlock:hover{
+  cursor: pointer;
+  outline:3px solid black;
+}

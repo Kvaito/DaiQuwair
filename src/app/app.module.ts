@@ -14,6 +14,13 @@ import { NewsComponent } from './news/news.component';
 import { FooterComponent } from './footer/footer.component';
 import { MenuComponent } from './menu/menu.component';
 import { AdminComponent } from './admin/admin.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { LoginComponent } from './login/login.component';
+import { EditNoteComponent } from './edit-note/edit-note.component';
+import { AddNoteComponent } from './add-note/add-note.component';
+import { AddGameComponent } from './add-game/add-game.component';
+import { EditGameComponent } from './edit-game/edit-game.component';
+import { GamePageComponent } from './game-page/game-page.component';
 
 @NgModule({
   declarations: [
@@ -27,13 +34,21 @@ import { AdminComponent } from './admin/admin.component';
     NewsComponent,
     FooterComponent,
     MenuComponent,
-    AdminComponent
+    AdminComponent,
+    LoginComponent,
+    EditNoteComponent,
+    AddNoteComponent,
+    AddGameComponent,
+    EditGameComponent,
+    GamePageComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        FormsModule,
+        ReactiveFormsModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
