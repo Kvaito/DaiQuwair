@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FireService} from "../fire.service";
+import {FireService} from "../services/fire.service";
 import EditorJS from "@editorjs/editorjs";
 
 @Component({

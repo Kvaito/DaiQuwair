@@ -20,8 +20,8 @@ export class FireService {
     }
   }
   notes:any={}
+  careers:any={}
   selectedNote: any;
-  selectedGame:any;
   storage=getStorage()
   actualImageDownloadUrl:string=''
 
@@ -65,7 +65,6 @@ export class FireService {
 
   //Использует первую часть почты для нахождения пользователя
   async getUserData(email: string) {
-    let userData={}
     let id: string = email.split('@')[0].toLowerCase()
     await get(child(this.dbRef, "users/" + id+'/'))
       .then((snapshot) => {
@@ -129,7 +128,16 @@ export class FireService {
     await remove(ref(db, 'notes/' + author_id + '/' + note_id))
     location.reload();
   }
-
+  //Вакансии
+  async getCareers(){
+    await get(child(this.dbRef, "careers/"))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          this.careers = snapshot.val();
+          console.log('careers',this.careers)
+        }
+      })
+  }
 
   //Роадмап
 
@@ -146,5 +154,25 @@ export class FireService {
     this.FireStorage.upload(firePath, localPath).then( async () => {
       this.actualImageDownloadUrl= await getDownloadURL(storageRef(getStorage(), firePath))
     })
+  }
+
+  async descriptEditorBlocks(blocksObject: any) {
+    // blocksObject = Object.values(blocksObject)
+    let descriptedString: string = ''
+    //Преобразовать content в удобную для отображения строку
+    for (let i = 0; i < blocksObject.length; i++) {
+      for (let j = 0; j < blocksObject[i].length; j++) {
+        if (blocksObject[i].type == 'header') {
+          blocksObject[i].text = ""
+        }
+        descriptedString = descriptedString + blocksObject[i].data.text + "</br>"
+      //   //Получение и прикрепление к записи ссылки на картинку, если такая есть
+      //   if (blocksObject[i].coverPath != '') {
+      //     blocksObject[i].coverUrl = await getDownloadURL(storageRef(getStorage(), blocksObject[i].coverPath))
+      //   }
+      }
+      blocksObject[i] = descriptedString
+    }
+    // return blocksObject
   }
 }

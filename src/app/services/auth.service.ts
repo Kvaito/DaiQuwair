@@ -17,7 +17,7 @@ export class AuthService {
 
   createUser(userData: any) {
     this.fireauth.createUserWithEmailAndPassword(userData.email, userData.password).then(() => {
-      this.fire.setUserData(userData).then(r => console.log(r))
+      this.fire.setUserData(userData).then()
     })
   }
 
