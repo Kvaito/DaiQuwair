@@ -1,5 +1,9 @@
 <div *ngIf="fire.siteIsReady&&auth.userIsReady">
-  <app-menu></app-menu>
-  <router-outlet></router-outlet>
+  <nav>
+    <app-menu></app-menu>
+  </nav>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
 </div>
 <!--<app-footer></app-footer>-->

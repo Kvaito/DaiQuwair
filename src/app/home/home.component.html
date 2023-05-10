@@ -1,1 +1,34 @@
-<p>home works!</p>
+<div>
+  <div class="banner">
+    <div class="title">
+      DAI QUWAIR
+    </div>
+  </div>
+  <div>
+<!--    Главные новости (пока последние)-->
+    <div *ngIf="newsReady">
+      <div *ngFor="let note of hotNews">
+        <div><img alt="Обложка записи"></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+<!--  Роадмап-->
+  <div>
+    <app-home-roadmap></app-home-roadmap>
+  </div>
+<!--  Команда-->
+  <div *ngIf="teamReady" class="teamContainer">
+    <div *ngFor="let member of team">
+      <div class="teamMember">
+        <div class="user_avatar_container">
+          <img *ngIf="member.avatarPath!=''" alt="memberAvatar" class="user_avatar" src="{{member.avatarUrl}}">
+          <img *ngIf="member.avatarPath==''" alt="memberAvatar" class="user_avatar" src="assets/site_images/avatar.jpg">
+        </div>
+        <div class="memberName">{{member.name}} {{member.surname}}</div>
+        <div>{{member.position.name}}</div>
+      </div>
+    </div>
+
+  </div>
+</div>

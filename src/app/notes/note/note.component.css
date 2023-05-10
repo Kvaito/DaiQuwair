@@ -1,0 +1,25 @@
+.cover_img{
+  width: 80%;
+  margin-left: 10%;
+}
+.rating{
+  color: white;
+  display: flex;
+  flex-direction: row;
+}
+.rating div{
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.rating div:hover{
+  cursor: pointer;
+}
+#rate_plus{
+  background-color: green;
+
+}
+#rate_minus{
+  background-color: darkred;
+}

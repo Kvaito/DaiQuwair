@@ -2,7 +2,7 @@
   Наши игры:
   <div *ngIf="gamesReady">
     <div *ngFor="let game of games">
-      <div class="gameBlock" routerLink="/game-page" (click)="fire.selectedGame=game">
+      <div class="gameBlock" routerLink="/game-page" [queryParams]="{gameTitle:game.gameTitle}">
         <div>{{game.title}}</div>
         <div [innerHTML]="game.description">{{game.description}}</div>
         <div><img style="width: 200px;height:200px" src="{{game.coverUrl}}"></div>

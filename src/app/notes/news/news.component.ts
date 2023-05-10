@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FireService} from "../services/fire.service";
+import {FireService} from "../../services/fire.service";
 import {getDownloadURL, getStorage,ref as storageRef} from "@angular/fire/storage";
 
 @Component({

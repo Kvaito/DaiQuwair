@@ -1,1 +1,23 @@
-<p>home-roadmap works!</p>
+<div>
+  <div *ngIf="roadmapReady" class="roadmapContainer">
+    <div class="pointContainer">
+      <div class="point" *ngFor="let point of roadmap">
+        <ul>
+          <li>{{point.title}}</li>
+          <li>{{point.start}}</li>
+          <li>{{point.deadline}}</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <ul class="time">
+        <li>20.03</li>
+        <li>21.03</li>
+        <li>22.03</li>
+        <li>23.03</li>
+        <li>24.03</li>
+        <li>25.03</li>
+      </ul>
+    </div>
+  </div>
+</div>

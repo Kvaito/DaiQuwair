@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {RoadmapService} from "../../services/roadmap.service";
 
 @Component({
   selector: 'app-pointlist',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PointlistComponent implements OnInit {
 
-  constructor() { }
+  constructor(public road:RoadmapService) { }
+
 
   ngOnInit(): void {
+
   }
+
 
 }

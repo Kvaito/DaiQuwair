@@ -1,8 +1,60 @@
-<div>
-  <div>Админ-панель</div>
-  <div>
-    {{message}}<br>
-    <button (click)="isCreatingUser=true">Создание пользователя</button>
+<div class="admin-page">
+  <div class="actionPanel">
+    <div>
+      <div class="user_avatar_container"><img class="user_avatar" src="assets/site_images/avatar.jpg"></div>
+    </div>
+    <div>
+      <div class="common_button" (click)="isCreatingUser=!isCreatingUser">Создание пользователя</div>
+      <div class="common_button" (click)="isAddingPosition=!isAddingPosition">Управление должностями</div>
+      <div class="common_button" (click)="isTagEditing=!isTagEditing">Управление активными тегами</div>
+      <div class="common_button" (click)="isCareerEditing=!isCareerEditing">Управление вакансиями</div>
+      <div class="common_button" (click)="isFAQAdding=!isFAQAdding">Добавить ответ FAQ</div>
+      <div class="common_button" (click)="isGamesAdding=!isGamesAdding">Добавление игры</div>
+    </div>
+    <div>
+      <div class="common_button" (click)="isPointAdding=!isPointAdding">Добавить пункт</div>
+      <div *ngIf="road.roadmapIsReady"><app-pointlist></app-pointlist></div>
+    </div>
+  </div>
+  <div class="forms">
+    <div *ngIf="isGamesAdding">
+      <app-add-game></app-add-game>
+    </div>
+    <!--    <button (click)="isGamesEditing=true">Редактировать</button>-->
+    <br>
+    <!--    Добавление должности-->
+    <div *ngIf="isAddingPosition">
+      <div><span>Все должности</span>
+        <div *ngFor="let position of positions">
+          <div>{{position.name}}</div>
+        </div>
+      </div>
+      Добавление должности
+      <form>
+        <div>
+          <label>
+            Название должности
+            <input type="text" name="position_name" [(ngModel)]="newPosition.positionName">
+          </label><br>
+          <label>
+            Системное название на английском, без специальных знаков
+            <input type="text" name="system_name" [(ngModel)]="newPosition.systemName">
+          </label>
+        </div>
+        <button (click)="addPosition()">
+          Добавить
+        </button>
+      </form>
+    </div>
+    <!--    Редактирование тегов-->
+    <div *ngIf="isTagEditing">
+      <div *ngFor="let tag of fire.systemData.tags">
+        <div>{{tag.tagName}}</div>
+      </div>
+      <input type="text" [(ngModel)]="newTag" name="tag">
+      <button (click)="addTag(newTag)">Добавить тег</button>
+    </div>
+    <!--    Создание пользователя-->
     <div *ngIf="isCreatingUser">
       <form>
         <div>
@@ -54,44 +106,48 @@
         <button (click)="createUser()">Создать пользователя</button>
       </form>
     </div>
-    <button (click)="isAddingPosition=true">Управление должностями</button>
-    <button (click)="isTagEditing=true">Управление активными тегами</button>
-    <button (click)="isGamesAdding=true">Добавление игры</button>
-    <div *ngIf="isGamesAdding"><app-add-game></app-add-game></div>
-    <div>
-
-    </div>
-    <button (click)="isGamesEditing=true">Редактировать</button>
-    <div><span>Все должности</span>
-    <div *ngFor="let position of positions">
-      <div>{{position.name}}</div>
-    </div></div>
-    <br>
-    <div *ngIf="isAddingPosition">
-      Добавление должности
-      <form>
-        <div>
-          <label>
-            Название должности
-            <input type="text" name="position_name" [(ngModel)]="newPosition.positionName">
-          </label><br>
-          <label>
-            Системное название на английском, без специальных знаков
-            <input type="text" name="system_name" [(ngModel)]="newPosition.systemName">
-          </label>
-        </div>
-        <button (click)="addPosition()">
-          Добавить
-        </button>
+    <!--    Управление вакансиями-->
+    <div class="manageBlock" *ngIf="isCareerEditing">
+      <form name="careerAdding">
+        Добавление вакансии
+        <ul>
+          <li>
+            <label>
+              <span>Раздел вакансии</span>
+              <select [(ngModel)]="newCareer.section" name="section">
+                <option *ngFor="let section of careerSections" [ngValue]="section">{{section.sectionName}}</option>
+              </select>
+            </label>
+          </li>
+          <li>
+            <label>
+              Название
+              <input [(ngModel)]="newCareer.name" type="text" name="title">
+            </label>
+          </li>
+          <li>
+            <label>
+              Короткое описание
+              <input [(ngModel)]="newCareer.shortDescription" type="textarea" name="shortDescr">
+            </label>
+          </li>
+          <li>
+            <label>
+              Полное описание
+              <input [(ngModel)]="newCareer.fullDescription" type="textarea" name="fullDescr">
+            </label>
+          </li>
+        </ul>
+        <div class="actionButton" (click)="addCareer()">Добавить вакансию</div>
       </form>
     </div>
-    <div *ngIf="isTagEditing">
-      <div *ngFor="let tag of fire.systemData.tags">
-        <div>{{tag.tagName}}</div>
-      </div>
-      <input type="text" [(ngModel)]="newTag" name="tag">
-      <button (click)="addTag(newTag)">Добавить тег</button>
+    <!--    Создание пункта роадмап-->
+    <div class="manageBlock" *ngIf="isPointAdding">
+      <app-add-roadpoint></app-add-roadpoint>
+    </div>
+<!--    FAQ управление-->
+    <div *ngIf="isFAQAdding">
+      <app-faq-add></app-faq-add>
     </div>
   </div>
-
 </div>

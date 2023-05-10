@@ -1,0 +1,23 @@
+.section{
+  color:white;
+  margin-top: 20px;
+}
+.sectionTitle{
+  /*border-radius: 15px 15px 0 0;*/
+  /*background-color:#33333D ;*/
+  /*color:white;*/
+  /*padding: 5px;*/
+  font-size:60px ;
+}
+.sectionItem{
+  margin: 10px;
+}
+.question{
+  font-size: 30px;
+}
+.question:hover{
+  background-color: #137773;
+}
+.answer{
+  margin-top: 10px;
+}

@@ -1,1 +1,23 @@
-<p>faq-add works!</p>
+<div>
+  <form>
+    <ul>
+      <li>
+        <label>
+          Вопрос
+          <input type="text" name="question" [(ngModel)]="FAQuestion.question">
+        </label>
+      </li>
+      <li>
+        Раздел вопросов
+        <select [(ngModel)]="FAQuestion.section" name="position">
+          <option *ngFor="let section of sections" [ngValue]="section">{{section.name}}</option>
+        </select>
+      </li>
+      <li>
+        Ответ
+        <div id="editor-js" class="infoBlock"></div>
+      </li>
+    </ul>
+    <div class="common_button" (click)="addFAQ()">Добавить пункт FAQ</div>
+  </form>
+</div>

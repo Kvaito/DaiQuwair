@@ -1,1 +1,16 @@
-<p>faq works!</p>
+<div>
+  Часто задаваемые вопросы:
+  <div *ngIf="faqIsReady">
+    <div class="section" *ngFor="let section of FAQ">
+      <div class="sectionTitle">{{section[0].section.name}}</div>
+      <div class="sectionItem" *ngFor="let question of section">
+        <div class="question">
+          {{question.question}}
+        </div>
+        <div class="answer" [innerHTML]="question.answer">
+          {{question.answer}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

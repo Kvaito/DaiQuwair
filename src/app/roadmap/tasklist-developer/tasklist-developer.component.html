@@ -1,1 +1,13 @@
-<p>tasklist-developer works!</p>
+<div>
+  <div *ngIf="tasksIsReady" class="list">
+    <div class="listTitle">Мои задачи:</div>
+    <div *ngFor="let task of tasks">
+      <div class="listItem">
+        <div>{{task.title}}</div>
+        <div class="listButtonContainer">
+          <div class="listButton">Выполнено</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

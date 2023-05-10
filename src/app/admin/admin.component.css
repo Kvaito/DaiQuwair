@@ -1,0 +1,7 @@
+.admin-page{
+
+}
+.actionPanel{
+  display: flex;
+  flex-direction: row;
+}

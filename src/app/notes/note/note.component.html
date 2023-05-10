@@ -1,1 +1,16 @@
-<p>note works!</p>
+<div>
+  <div *ngIf="noteIsReady">
+    <div class="infoBlock">
+      <div class="listTitle">{{note.title}}
+      {{author.name}}{{author.surname}}{{author.position.name}}</div>
+      <div *ngIf="note.cover_path!=''"><img class="cover_img" src="{{note.image_url}}"></div>
+      <div [innerHTML]="note.content">{{note.content}}</div>
+      <div class="rating">
+        <div id="rate_plus" (click)="setRating(1)">+</div>
+        <div id="rate_minus" (click)="setRating(-1)">-</div>
+        <div>{{note.rate}}</div>
+      </div>
+    </div>
+    <app-comments [note]="note"></app-comments>
+  </div>
+</div>

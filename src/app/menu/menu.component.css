@@ -1,15 +1,29 @@
 .menu{
-background-color: #100923;
+background-color:#677A7C;
   display: flex;
   flex-direction: row;
   height: 40px;
   padding: 10px;
+  justify-content: space-around;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
 }
 
 .menu_item{
-  background-color: cadetblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
   margin-left: 10px;
 }
+
+.menu_item:hover{
+  box-shadow: 0 3px 0 white;
+}
+
 .menu_item>a{
+  color: white;
   text-decoration: none;
 }
+

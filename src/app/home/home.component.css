@@ -1,0 +1,57 @@
+
+.banner{
+  height: 500px;
+  width: 100%;
+  background-image: url('../../assets/site_images/homepage_banner.jpg') ;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner__title{
+  font-size: 60px;
+  color: white;
+}
+
+.hotNewsSlider{
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  margin-top: 20px;
+}
+
+.hotNewsSlider__item{
+  margin-left: 20px;
+  width: 30%;
+}
+
+.hotNewsSlider__cover{
+  width: 100%;
+  height: 500px;
+}
+
+.hotNewsSlider__title{
+  display: flex;
+  justify-content: center;
+}
+
+.teamContainer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.teamContainer__member{
+  margin: 10px;
+  border-radius: 15px;
+  background-color:var(--blockBackgroud);
+  color:white;
+  height: 250px;
+}
+
+.memberName{
+  background-color:#83A1AB;
+}

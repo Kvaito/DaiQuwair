@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import EditorJS from "@editorjs/editorjs";
-import {FireService} from "../services/fire.service";
+import {FireService} from "../../services/fire.service";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {getDownloadURL} from "firebase/storage";
 import {getStorage, ref as storageRef} from "@angular/fire/storage";
@@ -22,7 +22,7 @@ export class AddNoteComponent implements OnInit {
     date:'',
     tags:[],
     id:'',
-    game:''
+    game:'Studio News'
   }
   imageData={
     localPath:'',

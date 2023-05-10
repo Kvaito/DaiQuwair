@@ -4,12 +4,14 @@
   <div class="menu_item"><a href="/games">Игры</a></div>
   <div class="menu_item"><a href="/careers">Вакансии</a></div>
   <div class="menu_item"><a href="/faq">FAQ</a></div>
-  <div *ngIf="fire.userData.role.role_id!==0" style="display: flex;flex-direction: row">
-    <div class="menu_item"><a href="/developer">Разработчику</a></div>
-    <div *ngIf="fire.userData.role.role_id==2">
-      <div class="menu_item"><a href="/admin">Админ-панель</a></div>
-    </div>
-  </div>
+  <div class="menu_item" *ngIf="fire.userData.role.role_id!==0"><a href="/developer">Разработчику</a></div>
+  <div class="menu_item" *ngIf="fire.userData.role.role_id==2"><a href="/admin">Админ-панель</a></div>
+<!--  <div *ngIf="fire.userData.role.role_id!==0" style="display: flex;flex-direction: row">-->
+<!--    <div class="menu_item"></div>-->
+<!--    <div *ngIf="fire.userData.role.role_id==2">-->
+<!--      <div class="menu_item"><a href="/admin">Админ-панель</a></div>-->
+<!--    </div>-->
+<!--  </div>-->
 
   <div *ngIf="!isUserAuth">
     <div class="menu_item"><a href="/login">Войти</a></div>

@@ -1,20 +1,40 @@
 <div>
-  <button (click)="isNoteCreating=!isNoteCreating">Создание записи</button>
-  <div>
-    Список моих записей:
-    <div *ngFor="let note of authorNotes">
-      <div style="display: flex;flex-direction: row">
-        <div>{{note.title}}</div>
-        <div><button (click)="changeEditingNote(note)">Редактировать</button></div>
-        <div><button (click)="deleteNote(note)">Удалить</button></div>
+  <div style="display: flex;flex-direction: row">
+    <div>
+      <div class="user_avatar_container">
+        <img *ngIf="fire.userData.avatarUrl==undefined" class="user_avatar" src="assets/site_images/avatar.jpg">
+        <img *ngIf="fire.userData.avatarUrl!=undefined" class="user_avatar" src="{{fire.userData.avatarUrl}}">
+      </div>
+      <div>{{fire.userData.name}} {{fire.userData.surname}}</div>
+      <div>{{fire.userData.position.name}}</div>
+      <div class="common_button" (click)="isUserEditing=!isUserEditing">Редактирование профиля</div>
+    </div>
+<!--Note list-->
+    <div>
+      <div class="common_button" (click)="isNoteCreating=!isNoteCreating">Создание записи</div>
+      <div *ngIf="notesAreReady" class="list">
+        <div class="listTitle">Список моих записей:</div>
+        <div *ngFor="let note of authorNotes">
+          <div class="listItem">
+            <div>{{note.title}}</div>
+            <div class="listButtonContainer">
+              <div class="listButton" (click)="changeEditingNote(note)">Редактировать</div>
+              <div class="listButton" (click)="deleteNote(note)">Удалить</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+<!--  <app-tasklist-developer></app-tasklist-developer>-->
   <div *ngIf="isNoteCreating">
     <app-add-note></app-add-note>
   </div>
   <div *ngIf="isNoteEditing">
     <app-edit-note></app-edit-note>
+  </div>
+  <div *ngIf="isUserEditing">
+    <app-developer-edit></app-developer-edit>
   </div>
 </div>
 

@@ -1,1 +1,33 @@
-<p>career works!</p>
+<div>
+  <div>Присоединяйся к нашей команде!</div>
+  <div class="careerImgBlock"><img class="careerImg" alt="career_page" src="assets/site_images/career_page.jpg"></div>
+  <div *ngIf="careersReady">
+    Мы ищем:
+    <div class="infoBlock">
+      Арт и анимация
+      <div *ngFor="let career of careers.art">
+        <div class="subsection">
+          <ul>
+            <li> {{career.name}}</li>
+            <li> {{career.shortDescription}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="infoBlock">
+     Программирование
+      <div *ngFor="let career of careers.programming">
+        <div class="subsection">
+          <ul>
+            <li> {{career.name}}</li>
+            <li> {{career.shortDescription}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="infoBlock">
+      Звуковое сопровождение
+
+    </div>
+  </div>
+</div>

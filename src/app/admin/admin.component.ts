@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FireService} from "../fire.service";
-import {AuthService} from "../auth.service";
+import {FireService} from "../services/fire.service";
+import {AuthService} from "../services/auth.service";
 import {getDatabase, ref} from "firebase/database";
 import {push, set} from "@angular/fire/database";
+import {RoadmapService} from "../services/roadmap.service";
 
 @Component({
   selector: 'app-admin',
@@ -11,11 +12,17 @@ import {push, set} from "@angular/fire/database";
 })
 export class AdminComponent implements OnInit {
 
-  constructor(public fire:FireService,private auth:AuthService) { }
+  constructor(public fire:FireService,private auth:AuthService,public road:RoadmapService) { }
 
   isCreatingUser:boolean=false
   isAddingPosition:boolean=false
   isTagEditing:boolean=false
+  isGamesAdding: boolean=false;
+  isGamesEditing: boolean=false;
+  isCareerEditing:boolean=false
+  isPointAdding:boolean=false;
+  isFAQAdding:boolean=false;
+
   newUser:any={
     nickname:'',
     email:'',
@@ -23,21 +30,30 @@ export class AdminComponent implements OnInit {
     name:'',
     surname:'',
     role:'',
-    position:''
+    position:'',
+    avatarPath:''
   }
   newPosition:any={
     positionName:'',
     systemName:''
   }
+
+  newCareer:any={
+    section:'',
+    name:'',
+    shortDescription:'',
+    fullDescription:''
+  }
+
   newTag:string=''
   message:string=''
   positions:Array<any>=Object.values(this.fire.systemData.positions)
   roles:Array<any>=Object.values(this.fire.systemData.roles)
-  isGamesAdding: boolean=false;
-  isGamesEditing: boolean=false;
+  careerSections:Array<any>=Object.values(this.fire.systemData.career)
+
 
   ngOnInit(): void {
-
+    this.road.getRoadmap()
   }
 
   addPosition(){
@@ -53,7 +69,6 @@ export class AdminComponent implements OnInit {
   }
 
   createUser(){
-    console.log(this.newUser)
     this.auth.createUser(this.newUser)
   }
 
@@ -62,7 +77,20 @@ export class AdminComponent implements OnInit {
     await push(ref(db, 'system/tags/'), {
       tagName:tagString
     })
-
     this.fire.getSystem()
   }
+
+  async addCareer() {
+    //валидация
+    const db = getDatabase()
+    await push(ref(db, 'careers/'+this.newCareer.section.systemName+'/'), {
+      section:this.newCareer.section,
+      name:this.newCareer.name,
+      shortDescription:this.newCareer.shortDescription,
+      fullDescription:this.newCareer.fullDescription
+    })
+    console.log('Добавил вот эту вакансию:',this.newCareer)
+  }
+
+
 }

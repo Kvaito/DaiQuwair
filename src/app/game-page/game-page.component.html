@@ -1,5 +1,26 @@
 <div>
-  <div>{{selectedGame.gameTitle}}</div>
-  <div [innerHTML]="selectedGame.description">{{selectedGame.description}}</div>
-  <div><img style="width: 200px;height:200px" src="{{selectedGame.coverUrl}}"></div>
+  <div class="infoBlock">
+    <div>{{selectedGame.gameTitle}}</div>
+    <div [innerHTML]="selectedGame.description">{{selectedGame.description}}</div>
+    <div><img style="width: 200px;height:200px" src="{{selectedGame.coverUrl}}"></div>
+  </div>
+  <div *ngIf="newsAreReady">
+    <div *ngFor="let note of filteredNotes" class="infoBlock">
+        <div class="title">{{note.title}}</div>
+      <div class="note_img" *ngIf="(note.cover_path!='')">
+        <img [src]="note.coverUrl" style="width: 200px;height: 200px" alt="note_img" class="image_note">
+      </div>
+        <span>{{note.date}}</span>
+        <div class="note_description text_space" [innerHTML]="note.content">{{note.content}}</div>
+        <div class="note_description text_space">{{note.author}}</div>
+        <div class="note_description rate">Рейтинг: {{note.rate}}</div>
+        <div class="tag_container">
+          <div class="tag_button" *ngFor="let tag of note.tags">
+            <div>{{tag}}</div>
+          </div>
+        </div>
+    </div>
+    <br>
+  </div>
 </div>
+

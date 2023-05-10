@@ -1,1 +1,40 @@
-<p>add-roadpoint works!</p>
+<div>
+  <div class="posMessage" *ngIf="message!=''">{{message}}</div>
+  <form>
+    Пункт "{{newPoint.title}}"
+    <ul>
+      <li>
+        <label>Название <input [(ngModel)]="newPoint.title" type="text" name="title"></label>
+      </li>
+      <li>
+        <label>Описание <input [(ngModel)]="newPoint.description" type="textarea" name="title"></label>
+      </li>
+      <li>
+        <label>Дата начала <input [(ngModel)]="newPoint.start" type="date" name="start"></label>
+      </li>
+      <li>
+        <label>Дата окончания <input [(ngModel)]="newPoint.deadline" type="date" name="deadline"></label>
+      </li>
+    </ul>
+  </form>
+<!--  New task-->
+  <div *ngFor="let task of newPoint.tasks">
+    Задача "{{task.title}}"
+    <form>
+      <ul>
+        <li><label>Название <input [(ngModel)]="task.title" type="text" name="title"></label></li>
+        <li><label>Описание <input [(ngModel)]="task.description" type="textarea" name="title"></label></li>
+        <li><label>
+          <select [(ngModel)]="task.position" name="position">
+            <option *ngFor="let position of positions" [ngValue]="position">{{position.name}}</option>
+          </select>
+        </label>
+        </li>
+      </ul>
+    </form>
+  </div>
+  <div class="actionButton" (click)="addTaskForm()">Добавить задачу</div>
+  <div class="actionButton" (click)="createPoint()">
+    Добавить пункт
+  </div>
+</div>

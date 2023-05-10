@@ -1,0 +1,26 @@
+<div class="infoBlock">
+  {{message}}
+  <form>
+    <ul>
+      <li>
+        <label>Имя <input name="name" type="text" [(ngModel)]="userData.name"></label>
+      </li>
+      <li>
+        <label>Фамилия <input type="text" name="surname" [(ngModel)]="userData.surname"></label>
+      </li>
+      <li>
+        <label>Никнэйм <input type="text" name="nickname" [(ngModel)]="userData.nickname"></label>
+      </li>
+<!--      <li>-->
+<!--        <label>Пароль <input type="password" name="password" [(ngModel)]="userData.password"></label>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <label>Подтвердить пароль <input type="password" name="repeatPassword" [(ngModel)]="repeatPassword"></label>-->
+<!--      </li>-->
+      <li>
+        <label>Загрузить аватар<input (change)="uploadImage($event)" type="file" name="avatar"></label>
+      </li>
+    </ul>
+    <div (click)="editProfile()">Сохранить</div>
+  </form>
+</div>

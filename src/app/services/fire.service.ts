@@ -19,10 +19,14 @@ export class FireService {
       role_id:0
     }
   }
-  notes:any={}
+  selectedDev:any={}
+  notes:any
+  comments:any
   careers:any={}
+  faq:any={}
   selectedNote: any;
   storage=getStorage()
+  team:any;
   actualImageDownloadUrl:string=''
 
   constructor(private router: Router, private FireStorage: AngularFireStorage) { }
@@ -59,27 +63,48 @@ export class FireService {
       surname:userData.surname,
       role:userData.role,
       position:userData.position,
-      id:id
+      id:id,
+      avatarPath:userData.avatarPath
     });
   }
 
-  //Использует первую часть почты для нахождения пользователя
-  async getUserData(email: string) {
-    let id: string = email.split('@')[0].toLowerCase()
-    await get(child(this.dbRef, "users/" + id+'/'))
+  async getTeam() {
+    await get(child(this.dbRef, "users/"))
       .then((snapshot) => {
         if (snapshot.exists()) {
-         this.userData = snapshot.val();
-         console.log('userData',this.userData)
+          this.team = snapshot.val();
         }
       })
   }
 
-  //Новости
+  //Use email as id for user searching
+  //options:
+  // ''- Get active user
+  // 'getDev'- Get data about any developer
+  async getUserData(email: string,options:string='') {
+    let id: string = email.split('@')[0].toLowerCase()
+    await get(child(this.dbRef, "users/" + id+'/'))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          switch (options){
+            case(''):{
+              this.userData = snapshot.val();
+              console.log('userData',this.userData)
+              break;
+            }
+            case('getDev'):{
+              this.selectedDev= snapshot.val();
+              break;
+            }
+          }
+
+        }
+      })
+  }
+
+  //News
   async setNote(note: any) {
-    const db = getDatabase()
-    console.log('Хочу создать следующую запись:', note)
-    await set(ref(db, 'notes/' + note.author_id+'/'+note.id), {
+    await set(ref(this.db, 'notes/' + note.author_id+'/'+note.id), {
       author:note.author,
       author_id:note.author_id,
       title:note.title,
@@ -87,40 +112,95 @@ export class FireService {
       content:note.content,
       date:note.date,
       tags:note.tags,
-      id:note.id
+      game:note.game,
+      id:note.id,
+      comments:[],
+      rate:0
     })
-    console.log('Пацаны, я создал запись', note)
   }
 
   //Получение записей с возможностью использовать фильтры
   // 'author_filter' - поиск по автору
-  //
-  async getNotes(options:any='',author:string=''){
+  // 'hot' - главные новости
+  // 'fromId' - получить отдельную запись по ID
+  async getNotes(options:any='',author:string='',noteId:number=0){
     switch (options){
-      //Получение всех записей
+      //Get ALL notes
       case '':{
         await get(child(this.dbRef, "notes/"))
           .then((snapshot) => {
             if (snapshot.exists()) {
-              console.log('Полученные записи',snapshot.val())
               this.notes=snapshot.val()
             }
           })
         break;
       }
-      //Поиск по автору
+      //Searching for author
       case 'author_filter':{
         await get(child(this.dbRef, "notes/"+author+'/'))
           .then((snapshot) => {
             if (snapshot.exists()) {
-              console.log('Полученные записи',snapshot.val())
               this.notes=snapshot.val()
+            }
+          })
+        break;
+      }
+      //Select only main news
+      case 'hot':{
+        await get(child(this.dbRef, "notes/"))
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              this.notes=snapshot.val()
+            }
+            //Searching for main
+          })
+        break;
+      }
+      case 'fromId':{
+        await get(child(this.dbRef, "notes/"))
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              let allNotes=[[]]
+              allNotes=Object.values(snapshot.val())
+              for(let i=0;i<allNotes.length;i++){
+                allNotes[i]=Object.values(allNotes[i])
+                //find note with ID equivalent to filter
+                this.notes=allNotes[i].find((note: { id: number; })=> note.id===Number(noteId)
+                )
+                if(this.notes!=undefined){
+                  break;
+                }
+              }
             }
           })
         break;
       }
     }
 
+  }
+
+  async setRate(rate:number,noteId:number,author:string){
+    await update(ref(this.db, 'notes/' + author+'/'+noteId), {
+      rate:rate
+    })
+  }
+
+  //Comments
+  async setComment(comment:any){
+    await set(ref(this.db, 'notes/' + comment.parentNote.author+'/'+comment.parentNote.noteId+'/comments/'+comment.id), {
+        id:comment.id,
+        author:comment.author,
+        content:comment.content,
+        parentNote:comment.parentNote
+    })
+  }
+  async getComments(note_id:number,author:string){
+    await get(child(this.dbRef, 'notes/' + author+'/'+note_id+'/comments/'))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          this.comments = snapshot.val();
+        }
+      })
   }
 
   async deleteNote(author_id:string,note_id:string) {
@@ -128,51 +208,62 @@ export class FireService {
     await remove(ref(db, 'notes/' + author_id + '/' + note_id))
     location.reload();
   }
-  //Вакансии
+  //Careers
   async getCareers(){
     await get(child(this.dbRef, "careers/"))
       .then((snapshot) => {
         if (snapshot.exists()) {
           this.careers = snapshot.val();
-          console.log('careers',this.careers)
         }
       })
   }
 
-  //Роадмап
-
-
-  //Игры
+  //Games
   async createGame(game:any) {
     //обработка жанров
     await set(ref(this.db, 'system/games/' + game.systemName + '/'), game);
     console.log('Игра добавлена')
   }
 
-  //Всопомогательные инструменты
+  //FAQ
+  async addFAQ(question:any){
+    question.id=this.generateId()
+    await set(ref(this.db, 'faq/' + question.section.systemName+'/'+question.id), {
+      id:question.id,
+      question:question.question,
+      answer:question.answer,
+      section:question.section
+    })
+  }
+
+  async getFAQ(){
+    await get(child(this.dbRef, "faq/"))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          this.faq = snapshot.val();
+        }
+      })
+  }
+
+  //Helpful tools
   async uploadImage(localPath: string,firePath:string) {
     this.FireStorage.upload(firePath, localPath).then( async () => {
       this.actualImageDownloadUrl= await getDownloadURL(storageRef(getStorage(), firePath))
     })
   }
 
-  async descriptEditorBlocks(blocksObject: any) {
-    // blocksObject = Object.values(blocksObject)
+  generateId(){
+    return new Date().getTime()
+  }
+
+  async descriptEditorBlocks(blocksArray: any) {
     let descriptedString: string = ''
     //Преобразовать content в удобную для отображения строку
-    for (let i = 0; i < blocksObject.length; i++) {
-      for (let j = 0; j < blocksObject[i].length; j++) {
-        if (blocksObject[i].type == 'header') {
-          blocksObject[i].text = ""
-        }
-        descriptedString = descriptedString + blocksObject[i].data.text + "</br>"
-      //   //Получение и прикрепление к записи ссылки на картинку, если такая есть
-      //   if (blocksObject[i].coverPath != '') {
-      //     blocksObject[i].coverUrl = await getDownloadURL(storageRef(getStorage(), blocksObject[i].coverPath))
-      //   }
+      for (let i = 0; i < blocksArray.length; i++) {
+        descriptedString = descriptedString + blocksArray[i].data.text + "</br>"
+        // blocksArray[i] = descriptedString
+        // descriptedString=''
       }
-      blocksObject[i] = descriptedString
-    }
-    // return blocksObject
+    return descriptedString
   }
 }

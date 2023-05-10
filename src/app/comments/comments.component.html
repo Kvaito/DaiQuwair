@@ -1,0 +1,27 @@
+<div>
+<!--  Form for comment creating-->
+  <div class="create_comment_form">
+<!-- If user is not authenticated-->
+    <div>
+<!--    User info -->
+    </div>
+<!--    If it's a developer-->
+    <form>
+      <label>Имя<input type="text" name="nickname" [(ngModel)]="newComment.author.name"></label>
+      <label>Почта<input type="email" name="email" [(ngModel)]="newComment.author.email"></label>
+    </form>
+    <div></div>
+    <div class="infoBlock" id="editor-js"></div>
+    <div class="common_button" (click)="addComment()">Отправить</div>
+  </div>
+<!--  Previous comments:-->
+  <div *ngIf="commentsAreReady">
+    <div *ngIf="comments!=undefined">
+      <div class="infoBlock" *ngFor="let comment of comments">
+        <div>{{comment.author.name}}</div>
+        <div [innerHTML]="comment.content">{{comment.content}}</div>
+      </div>
+    </div>
+  </div>
+
+</div>

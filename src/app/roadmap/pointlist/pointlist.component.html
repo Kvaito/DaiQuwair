@@ -1,1 +1,13 @@
-<p>pointlist works!</p>
+<div>
+  <div class="list">
+    <div class="listTitle">Пункты роадмап</div>
+    <div *ngFor="let point of road.roadmap" class="listItem">
+      <div>{{point.title}}</div>
+      <div class="listButtonContainer">
+        <div class="listButton">выполнить</div>
+        <div class="listButton">ред</div>
+        <div class="listButton">скрыть</div>
+      </div>
+    </div>
+  </div>
+</div>

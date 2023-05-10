@@ -1,0 +1,21 @@
+.time{
+  list-style: none;
+  display: flex;
+  position: sticky;
+  background-color: white;
+}
+.time li{
+  margin-left: 20px;
+}
+.roadmapContainer{
+  background-image: url("../../../assets/site_images/roadmapBack.jpg");
+}
+.pointContainer{
+  width: 100%;
+  height: 400px;
+  overflow-y: scroll;
+}
+.point{
+  background-color: #1f4850;
+  border-radius: 0 15px 15px 0;
+}

@@ -1,17 +1,19 @@
 <div>
   <div *ngIf="notesReady">
-    <div class="note blue_block" *ngFor="let note of notes">
-      <div class="note_text" style="display: flex;flex-direction: row">
+    <app-filtering [notes]="this.notes"></app-filtering>
+    <div class="infoBlock" *ngFor="let note of notes">
+      <div class="note_text" routerLink="/note" [queryParams]="{noteId:note.id}" style="display: flex;flex-direction: row">
         <div>
           <div class="note_img" *ngIf="(note.cover_path!='')">
             <img [src]="note.imageUrl" style="width: 200px;height: 200px" alt="note_img" class="image_note">
           </div>
         </div>
         <div>
-          <div class="note_description text_space">{{note.title}}</div>
+          <div class="title">{{note.title}}</div>
           <span>{{note.date}}</span>
           <div class="note_description text_space" [innerHTML]="note.content">{{note.content}}</div>
           <div class="note_description text_space">{{note.author}}</div>
+          <div class="note_description rate">Рейтинг: {{note.rate}}</div>
           <div class="tag_container">
             <div class="tag_button" *ngFor="let tag of note.tags">
               <div>{{tag}}</div>

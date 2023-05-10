@@ -1,21 +1,183 @@
-/* You can add global styles to this file, and also import other style files */
-.testblock{
+:root{
+  --blockBackground:677A7CE5;
+}
+
+html {
+  height: 100%;
+}
+
+*:focus {
+  outline: none;
+}
+
+ul {
+  list-style-type: none;
+  list-style-position: outside;
+}
+
+body {
+  font-family: "Century Gothic", serif;
+  font-size: 20px;
+  margin: 0;
+  height: 100%;
+  background-image: url("/assets/site_images/background.png");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+main {
+  /*margin-left: 20%;*/
+  /*margin-right: 20%;*/
+  margin-top: 100px;
+  color: white;
+}
+
+/*Блоки*/
+.sectionTitle{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
+
+.testblock {
   background-color: #100923;
-  color:white;
+  color: white;
+}
+
+.manageBlock {
+  background-color: white;
+  padding: 5px;
+  margin: 5px;
+}
+
+.infoBlock {
+  background-color: #559eb4;
+  padding: 5px;
+  margin: 5px;
 }
 
 /* tags */
-.tag_container{
+.tag_container {
   display: flex;
   flex-direction: row;
 }
 
-.tag_button{
+
+/*Buttons*/
+.button {
+
+}
+
+.common_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  min-width: 100px;
+  max-width: 200px;
+  padding: 5px;
+  height: 30px;
+  margin: 5px;
+}
+
+.common_button:hover {
+  cursor: pointer;
+  background-color: #b2d5d5;
+}
+
+.tag_button {
   background-color: #100923;
   color: white;
   margin-left: 10px;
 }
-.tag_button:hover{
+
+.tag_button:hover {
   background-color: #25164f;
   cursor: pointer;
 }
+
+.actionButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #16393f;
+  color: white;
+  min-width: 100px;
+  max-width: 200px;
+  padding: 5px;
+  height: 30px;
+  margin: 5px;
+}
+
+.actionButton {
+  cursor: pointer;
+  background-color: #1f4850;
+}
+
+/*Аватарки*/
+.user_avatar_container {
+
+}
+
+.user_avatar {
+  width: 120px;
+  height: 150px;
+}
+
+/*Уведомления*/
+.posMessage {
+  height: 50px;
+  margin: 5px;
+  margin-left: 5%;
+  width: 90%;
+  background-color: #95e595;
+  border: 1px solid #5bb671;
+}
+
+/*Списки*/
+.list {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  border-radius: 15px;
+  border: 1px solid black;
+}
+
+.listTitle {
+  border-radius: 15px 15px 0 0;
+  background-color: #33333D;
+  color: white;
+  padding: 5px;
+}
+
+.listItem {
+  background-color: #A5D0E8;
+  height: 40px;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.listButtonContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.listButton {
+  width: 35px;
+  height: 35px;
+  background-color: white;
+  margin-left: 5px;
+}
+
+.listButton:hover {
+  background-color: #a7bbea;
+  cursor: pointer;
+}
+/* Слайдер */

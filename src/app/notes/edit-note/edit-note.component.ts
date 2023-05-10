@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FireService} from "../services/fire.service";
+import {FireService} from "../../services/fire.service";
 import EditorJS from "@editorjs/editorjs";
 
 @Component({
@@ -17,7 +17,7 @@ export class EditNoteComponent implements OnInit {
   //Переменные для editor.js
   Underline = require('@editorjs/underline');
   editor: any
-  constructor(private fire: FireService) { }
+  constructor(public fire: FireService) { }
 
   ngOnInit(): void {
     this.note=this.fire.selectedNote

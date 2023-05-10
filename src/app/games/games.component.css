@@ -1,7 +1,8 @@
 .gameBlock{
-
+  background-color: white;
+  padding: 20px;
 }
 .gameBlock:hover{
   cursor: pointer;
-  outline:3px solid black;
+  outline:3px solid #59cbbe;
 }

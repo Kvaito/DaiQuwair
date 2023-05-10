@@ -1,0 +1,18 @@
+<div class="filters_container">
+  <div class="common_button">
+    <select [(ngModel)]="option">
+      <option value="date">По дате</option>
+      <option value="popularity">По популярности</option>
+    </select>
+  </div>
+  <div class="common_button">
+    <select [(ngModel)]="filterType" *ngIf="option=='date'" (change)="filterNotes()">
+      <option value="new">Самые новые</option>
+      <option value="old">Самые старые</option>
+    </select>
+    <select [(ngModel)]="filterType" *ngIf="option=='popularity'"  (change)="filterNotes()">
+      <option value="highrate">Самая высокая оценка</option>
+      <option value="comments">Количество комментариев</option>
+    </select>
+  </div>
+</div>
