@@ -4,9 +4,10 @@
     <div *ngFor="let point of road.roadmap" class="listItem">
       <div>{{point.title}}</div>
       <div class="listButtonContainer">
-        <div class="listButton">выполнить</div>
-        <div class="listButton">ред</div>
-        <div class="listButton">скрыть</div>
+        <div class="buttonIcon" (click)="editPoint(point)">ред</div>
+        <div class="buttonIcon" *ngIf="point.status=='shown'" (click)="hide(point.id)">скрыть</div>
+        <div class="buttonIcon" *ngIf="point.status=='hidden'" (click)="show(point.id)">показать</div>
+        <div class="buttonIcon" (click)="road.deletePoint(point.id)">удалить</div>
       </div>
     </div>
   </div>

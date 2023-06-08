@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FireService} from "../services/fire.service";
+import {FireService} from "../../services/fire.service";
 import {getDownloadURL, getStorage, ref as storageRef} from "@angular/fire/storage";
 
 @Component({
@@ -15,10 +15,10 @@ export class GamesComponent implements OnInit {
 
   ngOnInit(): void {
     this.games=Object.values(this.fire.systemData.games)
-    this.handleNotes()
+    this.handleGames()
   }
 
-  async handleNotes() {
+  async handleGames() {
     //Преобразовать content в удобную для отображения строку
     for (let i = 0; i < this.games.length; i++) {
       let gameDescription: string = ''

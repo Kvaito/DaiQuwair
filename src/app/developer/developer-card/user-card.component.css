@@ -1,0 +1,15 @@
+.user__data{
+  gap:20px;
+}
+.user__avatar{
+  width: 100px;
+  aspect-ratio: 1/1;
+  background-size: cover;
+  border-radius: var(--borderRadius);
+}
+.white{
+  color: white;
+}
+.blue{
+  color:var(--blockBackground);
+}

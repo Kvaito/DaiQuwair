@@ -1,23 +1,29 @@
 <div>
   <form>
+    <div class="sectionTitle">Добавление FAQ</div>
     <ul>
       <li>
         <label>
           Вопрос
-          <input type="text" name="question" [(ngModel)]="FAQuestion.question">
+          <div>
+            <input type="text" name="question" [(ngModel)]="FAQuestion.question">
+          </div>
         </label>
       </li>
       <li>
         Раздел вопросов
-        <select [(ngModel)]="FAQuestion.section" name="position">
-          <option *ngFor="let section of sections" [ngValue]="section">{{section.name}}</option>
-        </select>
+        <div>
+          <select [(ngModel)]="FAQuestion.section" name="position">
+            <option *ngFor="let section of sections" [ngValue]="section">{{section.name}}</option>
+          </select>
+        </div>
+
       </li>
       <li>
         Ответ
         <div id="editor-js" class="infoBlock"></div>
       </li>
     </ul>
-    <div class="common_button" (click)="addFAQ()">Добавить пункт FAQ</div>
+    <div class="button buttonTransparent" (click)="addFAQ()">Добавить пункт FAQ</div>
   </form>
 </div>

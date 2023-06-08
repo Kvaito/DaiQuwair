@@ -1,1 +1,22 @@
-<p>footer works!</p>
+<div >
+  <div class="footer">
+    <div><a href="" style="padding-left: 10px;">
+      <img class="footer__logo" src="/assets/site_images/dq_logo.png" alt="dq_logo">
+      <img class="menu_img footer__title" src="/assets/site_images/dq_title.png" alt="dq_title">
+    </a></div>
+    <div>
+      <div *ngIf="!isUserAuth">
+        <div class="menu_item"><a href="/login">Войти</a></div>
+      </div>
+      <div *ngIf="isUserAuth" class="footer__auth">
+        <div class="menu_item">{{userName}}</div>
+        <div class="menu_item"><div (click)="logout()">Выйти</div></div>
+      </div>
+    </div>
+    <div>
+      <div>Made by Kvaito</div>
+      <div>*иконки соцсетей*</div>
+    </div>
+  </div>
+
+</div>

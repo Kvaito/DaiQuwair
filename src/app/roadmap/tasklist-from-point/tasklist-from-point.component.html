@@ -1,1 +1,10 @@
-<p>tasklist-from-point works!</p>
+<div class="pointCard" [style]="{'width':point.width+'px'}">
+  Задачи:
+  <ul>
+    <li *ngFor="let task of point.tasks" >
+      <div>{{task.title}}</div>
+      <div *ngIf="task.status=='progress'">☐</div>
+      <div *ngIf="task.status=='completed'">☑</div>
+    </li>
+  </ul>
+</div>

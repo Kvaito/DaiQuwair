@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-tasklist-from-point',
@@ -6,6 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tasklist-from-point.component.css']
 })
 export class TasklistFromPointComponent implements OnInit {
+
+  @Input() point={
+    tasks:[{
+      title:'',
+      status:'progress'
+    }],
+    start:'',
+    deadline:'',
+    width:''
+  }
 
   constructor() { }
 

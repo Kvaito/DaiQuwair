@@ -1,11 +1,22 @@
 <div>
   <div *ngIf="tasksIsReady" class="list">
-    <div class="listTitle">Мои задачи:</div>
+    <div class="sectionTitle listTitle">Мои задачи</div>
     <div *ngFor="let task of tasks">
-      <div class="listItem">
-        <div>{{task.title}}</div>
-        <div class="listButtonContainer">
-          <div class="listButton">Выполнено</div>
+      <div class="listItem" (click)="task.detailsShow=!task.detailsShow">
+        <div>{{task.title}}
+          <div *ngIf="task.detailsShow">
+            <div>
+              Описание<div>{{task.description}}</div> </div>
+            <div>Конечный срок пункта<div>
+              {{task.deadline}}
+            </div>
+              </div>
+          </div></div>
+        <div *ngIf="task.status!='completed'" class="listButtonContainer">
+          <div (click)="completeTask(task.index,task.point_id)" class="button buttonIcon">Завершить</div>
+        </div>
+        <div *ngIf="task.status=='completed'" class="listButtonContainer">
+          <div >Выполнено</div>
         </div>
       </div>
     </div>

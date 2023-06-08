@@ -1,0 +1,10 @@
+<div>
+  <div *ngIf="!comment.author.isDev">
+    <div class="comment__item__name">{{comment.author.name}}</div>
+    <div [innerHTML]="comment.content">{{comment.content}}</div>
+  </div>
+  <div  *ngIf="comment.author.isDev&&authorDevData.name!==''" >
+    <app-user-card [userData]="authorDevData" flexDirection="horizontal" nameColor="blue"></app-user-card>
+    <div [innerHTML]="comment.content">{{comment.content}}</div>
+  </div>
+</div>

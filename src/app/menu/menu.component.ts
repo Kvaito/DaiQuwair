@@ -9,17 +9,10 @@ import {FireService} from "../services/fire.service";
 })
 export class MenuComponent implements OnInit {
 
-  isUserAuth:boolean=false
-  userName:string=''
+
   constructor(private auth:AuthService,public fire:FireService) { }
 
   ngOnInit(): void {
-    if(this.auth.userIsReady){
-      if(this.auth.userAuthData!=={}){
-        this.isUserAuth=true
-        this.userName=this.auth.userAuthData.email.split('@')[0].toLowerCase()
-      }
-    }
   }
 
 

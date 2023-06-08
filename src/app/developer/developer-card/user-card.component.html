@@ -1,0 +1,7 @@
+<div class="user__data horizontal" [ngClass]="flexDirection">
+  <div class="user__avatar" [ngStyle]="{'background-image':'url('+ userData.avatarUrl +')'}"></div>
+  <div>
+    <div [ngClass]="nameColor" >{{userData.name}} {{userData.surname}}</div>
+    <div>{{userData.position.name}}</div>
+  </div>
+</div>

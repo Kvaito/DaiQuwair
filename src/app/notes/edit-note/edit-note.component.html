@@ -1,5 +1,35 @@
 <div>
-  <div><input type="text" [(ngModel)]="note.title"></div>
-<div id="editor-js" style="background-color: aquamarine"></div>
-  <button (click)="edit()">Изменить запись</button>
+  <form>
+    <div class="sectionTitle">Редактирование записи</div>
+    <div>Заголовок
+      <div><input type="text" name="title" [(ngModel)]="note.title"></div>
+    </div>
+    <div>
+      Текст записи
+      <div id="editor-js"></div>
+    </div>
+    <div *ngIf="imageData.imageUploaded"><img style="width: 200px;height: 200px" [src]=imageData.downloadUrl></div>
+    <div>
+      <label class="inputFile">
+        <input type="file" (change)="uploadImage($event)" name="file" accept="*.png.jpg">
+        <span class="inputFile__button button buttonTransparent">Загрузить обложку</span>
+      </label>
+    </div>
+    <div>Введите теги для фильтрации через пробел
+      <div>
+        <input type="text" placeholder="Теги" name="tags" [(ngModel)]="note.tags"></div>
+    </div>
+    <div>
+    </div>
+    <div>
+      <label>
+        <span>Игра</span>
+        <select [(ngModel)]="note.game" name="role">
+          <option *ngFor="let game of games" [ngValue]="game.gameTitle">{{game.gameTitle}}</option>
+        </select>
+      </label>
+    </div>
+    <div class="button buttonTransparent" (click)="edit()">Изменить запись</div>
+  </form>
+
 </div>

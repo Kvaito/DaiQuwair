@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {child, get, getDatabase, ref} from "firebase/database";
-import {set} from "@angular/fire/database";
+import {child, get, getDatabase, ref, update} from "firebase/database";
+import {remove, set} from "@angular/fire/database";
 import {FireService} from "./fire.service";
 
 @Injectable({
@@ -10,6 +10,16 @@ export class RoadmapService {
 
   roadmap:any
   roadmapIsReady=false
+  selectedPoint:any={
+    id:this.fire.generateId(),
+    title:'',
+    deadline:'',
+    start:'',
+    description:'',
+    status:'shown',
+    tasks:[]
+  }
+
 
   constructor(private fire:FireService) { }
 
@@ -18,7 +28,6 @@ export class RoadmapService {
       .then((snapshot) => {
         if (snapshot.exists()) {
           this.roadmap = Object.values(snapshot.val()) ;
-          console.log('Roadmap', this.roadmap)
           //Позволяем прогружаться остальной части сайта после получения всех важных данных
           this.roadmapIsReady = true
         }
@@ -32,10 +41,29 @@ export class RoadmapService {
       deadline: point.deadline,
       start: point.start,
       description: point.description,
-      status: false,
+      status: point.status,
       tasks: point.tasks
     })
     //Обновляем данные на сайте
     this.getRoadmap()
+  }
+
+  async changePointStatus(pointId:number, status:string) {
+    await update(ref(this.fire.db, 'roadmap/' + pointId), {
+      status: status
+    })
+    this.getRoadmap()
+  }
+
+  async deletePoint(pointId: number) {
+    await remove(ref(this.fire.db, 'roadmap/' + pointId))
+    //Обновляем данные на сайте
+    this.getRoadmap()
+  }
+
+  async completeTask(taskIndex: number,pointId:number) {
+    await update(ref(this.fire.db, 'roadmap/' + pointId+'/tasks/'+taskIndex),{
+      status:'completed'
+    })
   }
 }

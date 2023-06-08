@@ -1,16 +1,21 @@
-<div>
-  <div *ngIf="noteIsReady">
-    <div class="infoBlock">
-      <div class="listTitle">{{note.title}}
-      {{author.name}}{{author.surname}}{{author.position.name}}</div>
-      <div *ngIf="note.cover_path!=''"><img class="cover_img" src="{{note.image_url}}"></div>
-      <div [innerHTML]="note.content">{{note.content}}</div>
-      <div class="rating">
-        <div id="rate_plus" (click)="setRating(1)">+</div>
-        <div id="rate_minus" (click)="setRating(-1)">-</div>
-        <div>{{note.rate}}</div>
-      </div>
-    </div>
-    <app-comments [note]="note"></app-comments>
+
+  <div class="padding"></div>
+  <div class="rate">
+    <div class="rate__button rate__plus" (click)="setRating(1)">↑</div>
+    <div>{{note.rate}}</div>
+    <div class="rate__button rate__minus" (click)="setRating(-1)">↓</div>
   </div>
-</div>
+  <div *ngIf="noteIsReady">
+    <div class="note">
+      <app-user-card [userData]="author" nameColor="blue"></app-user-card>
+      <div class="sectionTitle">{{note.title}}
+      </div>
+      <div *ngIf="note.cover_path!=''" class="note__coverContainer"><img alt="cover" class="note__cover"
+                                                                         src="{{note.image_url}}"></div>
+      <div [innerHTML]="note.content">{{note.content}}</div>
+      <div>{{note.date}}</div>
+    </div>
+
+        <app-comments [note]="note"></app-comments>
+  </div>
+

@@ -1,0 +1,39 @@
+
+  <div class="banner__block" [ngStyle]="{'background-image': 'url(' + selectedGame.coverUrl + ')'}">
+    <div class="banner__text">
+      <h2 class="banner__text__title text_shadow">{{selectedGame.gameTitle}}</h2>
+      <div class="banner__text__slogan text_shadow"></div>
+    </div>
+  </div>
+  <div class="horizontal contentSection">
+    <div class="blockTransparent" style="width: 58%">
+      <div class="padding"></div>
+      <h4 class="sectionTitle">О {{selectedGame.gameTitle}}</h4>
+      <div class="padding"></div>
+      <div [innerHTML]="selectedGame.description"><p>{{selectedGame.description}}</p></div>
+    </div>
+    <div class="blockTransparent" style="width: 41%">
+      <div class="padding"></div>
+      <h4 class="sectionTitle">Системные требования</h4>
+      <div class="padding"></div>
+      <div>Любой современный браузер, поддерживающий работу движка Gadot ;)</div>
+    </div>
+  </div>
+  <div class="padding"></div>
+  <div class="contentSection blockBackground">
+    <h4 class="sectionTitle">{{selectedGame.gameTitle}} галерея</h4>
+    <div></div>
+  </div>
+  <div *ngIf="newsAreReady">
+    <h4 class="sectionTitle">{{selectedGame.gameTitle}} новости</h4>
+    <section class="gridWrapper">
+      <div *ngFor="let note of filteredNotes" class="note blockBackground">
+          <div class="note__text">
+            <div class="note__date">{{note.date}}</div>
+            <h3 class="note__title">{{note.title}}</h3>
+          </div>
+      </div>
+    </section>
+  </div>
+
+

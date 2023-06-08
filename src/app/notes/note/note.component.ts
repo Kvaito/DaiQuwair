@@ -21,7 +21,8 @@ export class NoteComponent implements OnInit {
     content: '',
     rate: '',
     author_id: '',
-    id: 0
+    id: 0,
+    date:''
   }
   noteIsReady: boolean = false
   commentsReady: boolean = false
@@ -51,10 +52,15 @@ export class NoteComponent implements OnInit {
     //Descript content in default string
     this.note.content = await this.fire.descriptEditorBlocks(this.note.content)
     //Get author
-    await this.fire.getUserData(this.note.author_id, 'getDev').then(() =>
-      this.author = this.fire.selectedDev
-    )
+    await this.getAuthor()
     this.noteIsReady = true
+  }
+
+  async getAuthor() {
+    await this.fire.getUserData(this.note.author_id, 'getDev').then(async () => {
+        this.author = this.fire.selectedDev
+      }
+    )
   }
 
   async setRating(rate: number) {

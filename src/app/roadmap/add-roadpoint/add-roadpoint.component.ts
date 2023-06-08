@@ -16,32 +16,25 @@ export class AddRoadpointComponent implements OnInit {
   message=''
   positions:Array<any>=Object.values(this.fire.systemData.positions)
 
-  newPoint:any={
-    id:this.fire.generateId(),
-    title:'',
-    deadline:'',
-    start:'',
-    description:'',
-    status:false,
-    tasks:[]
+  get selectedPoint() {
+    return this.road.selectedPoint;
   }
 
   createPoint(){
-    console.log('newPoint',this.newPoint)
     // Проверка полей
-    this.road.setPoint(this.newPoint)
+    this.road.setPoint(this.road.selectedPoint)
     this.message='Пункт успешно добавлен!'
-    this.newPoint.id=this.fire.generateId()
+    this.road.selectedPoint.id=this.fire.generateId()
   }
 
   addTaskForm(){
-    this.newPoint.tasks.push({
+    this.road.selectedPoint.tasks.push({
       id:this.fire.generateId(),
-      point_id:this.newPoint.id,
+      point_id:this.road.selectedPoint.id,
       title:'',
       position:'',
       description:'',
-      status:''
+      status:'progress'
     })
   }
 }

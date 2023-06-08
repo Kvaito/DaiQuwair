@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FireService} from "../services/fire.service";
+import {FireService} from "../../services/fire.service";
 import {ActivatedRoute} from "@angular/router";
 import {getDownloadURL, getStorage, ref as storageRef} from "@angular/fire/storage";
 
@@ -32,8 +32,11 @@ export class GamePageComponent implements OnInit {
     gamesArray = Object.values(this.fire.systemData.games)
     this.selectedGame = gamesArray.find(game => game.gameTitle === this.gameTitle)
     //Prepare game to show
-    this.selectedGame.description = await this.fire.descriptEditorBlocks(this.selectedGame.description)
-    this.selectedGame.coverUrl = await getDownloadURL(storageRef(getStorage(), this.selectedGame.coverPath))
+    console.log(this.selectedGame)
+    if(this.selectedGame.coverUrl==undefined){
+      this.selectedGame.description = await this.fire.descriptEditorBlocks(this.selectedGame.description)
+      this.selectedGame.coverUrl = await getDownloadURL(storageRef(getStorage(), this.selectedGame.coverPath))
+    }
     //Get news
     await this.fire.getNotes()
     this.filteredNotes = Object.values(this.fire.notes)
@@ -57,7 +60,6 @@ export class GamePageComponent implements OnInit {
     })
     console.log('После',this.filteredNotes)
     this.newsAreReady=true
-
   }
 
 }

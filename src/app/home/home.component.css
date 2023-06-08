@@ -18,7 +18,7 @@
 .hotNewsSlider{
   display: flex;
   flex-direction: row;
-  overflow-x: scroll;
+  overflow-x: auto;
   margin-top: 20px;
 }
 
@@ -37,21 +37,31 @@
   justify-content: center;
 }
 
-.teamContainer{
+.team__container{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
 }
 
-.teamContainer__member{
+.team__member{
   margin: 10px;
-  border-radius: 15px;
-  background-color:var(--blockBackgroud);
+  border-radius: var(--borderRadius);
+  background-color:var(--blockBackground);
   color:white;
   height: 250px;
+  width: 180px;
+}
+.team__member>div{
+  display: flex;
+  justify-content: center;
+}
+.team__avatar{
+  width: 180px;
+  height: 140px;
+  border-radius: var(--borderRadius) var(--borderRadius) 0 0;
 }
 
-.memberName{
-  background-color:#83A1AB;
+.team_name{
+  font-size: 25px;
 }

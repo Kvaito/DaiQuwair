@@ -12,7 +12,7 @@ import {getStorage, ref as storageRef} from "@angular/fire/storage";
 export class HomeComponent implements OnInit {
 
   constructor(private fire:FireService,private road:RoadmapService) { }
-  hotNews=[]
+  hotNews:Array<any>=[]
   team=[
     {name:'',
     surname:'',
@@ -35,15 +35,28 @@ export class HomeComponent implements OnInit {
   }
 
   async getNews(){
-    await this.fire.getNotes('hot')
+    await this.fire.getNotes()
     this.hotNews=Object.values(this.fire.notes)
-    this.newsReady=true
+    for(let i=0;i<this.hotNews.length;i++){
+      this.hotNews[i]=Object.values(this.hotNews[i])
+    }
+    this.hotNews = this.hotNews.concat.apply([],this.hotNews);
+    this.hotNews=this.hotNews.filter((note)=>{
+      return note.status=='important'
+    })
+    if(this.hotNews!=undefined){
+      for(let note of this.hotNews){
+        if(note.cover_path!=''){
+          note.coverUrl=await getDownloadURL(storageRef(getStorage(), note.cover_path))
+        }
+      }
+      this.newsReady=true
+    }
   }
 
   async getTeam() {
     await this.fire.getTeam().then(async () => {
       this.team = Object.values(this.fire.team)
-      console.log('team', this.team)
       for (let i = 0; i < this.team.length; i++) {
         if (this.team[i].avatarPath != '' && this.team[i].avatarPath != undefined) {
           this.team[i].avatarUrl = await getDownloadURL(storageRef(getStorage(), this.team[i].avatarPath))

@@ -20,6 +20,7 @@ export class CommentsComponent implements OnInit {
   editor: any
   newComment:any={
     author:{
+      isDev:false,
       name:'',
       email:''
     },
@@ -32,6 +33,7 @@ export class CommentsComponent implements OnInit {
   }
   comments:any={}
   commentsAreReady:boolean=false
+  isAuth:boolean=false
 
   ngOnInit(): void {
     this.editor = new EditorJS({
@@ -45,31 +47,43 @@ export class CommentsComponent implements OnInit {
       placeholder: 'Текст комментария',
       autofocus: true
     })
+
     this.getComments()
+    if(this.fire.userData.role.role_id!=0){
+      this.isAuth=true
+    }
   }
 
-  async addComment() {
+  async addComment(devData={email:'',nickname:''}) {
     await this.editor.save().then((outputData: any) => {
       this.newComment.content = outputData.blocks
     })
     this.newComment.parentNote.author=this.note.author_id
     this.newComment.parentNote.noteId=this.note.id
+    if (devData.email!=''){
+      console.log('бля')
+      this.newComment.author.isDev=true
+      this.newComment.author.email=devData.email;
+      this.newComment.author.name=devData.nickname;
+    }
     await this.fire.setComment(this.newComment)
-    await this.fire.getComments(this.note.id,this.note.author_id)
-    this.comments=this.fire.comments
+    await this.getComments()
   }
 
   async getComments() {
     await this.fire.getComments(this.note.id, this.note.author_id)
+    this.commentsAreReady=false;
     if(this.fire.comments!=undefined){
       this.comments =Object.values(this.fire.comments)
-      console.log(this.comments)
       for(let i=0;i< this.comments.length;i++){
         this.comments[i].content=await this.fire.descriptEditorBlocks(this.comments[i].content)
-        console.log(this.comments[i])
+        //Check author. If it's a developer, so get his data too
       }
       this.commentsAreReady=true
     }
+  }
 
+  getUser(){
+    return this.fire.userData
   }
 }

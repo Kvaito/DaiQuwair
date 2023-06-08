@@ -13,11 +13,19 @@
   margin: 10px;
 }
 .question{
+
+}
+.question__text{
   font-size: 30px;
+  height: 60px;
+  display: flex;
+  align-items: center;
 }
-.question:hover{
-  background-color: #137773;
+.question__text:hover{
+  background-color: var(--blockBackground);
+  cursor: pointer;
 }
-.answer{
+.question__answer{
   margin-top: 10px;
 }
+

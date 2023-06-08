@@ -1,27 +1,32 @@
-<div>
-<!--  Form for comment creating-->
-  <div class="create_comment_form">
-<!-- If user is not authenticated-->
-    <div>
-<!--    User info -->
-    </div>
-<!--    If it's a developer-->
-    <form>
-      <label>Имя<input type="text" name="nickname" [(ngModel)]="newComment.author.name"></label>
-      <label>Почта<input type="email" name="email" [(ngModel)]="newComment.author.email"></label>
-    </form>
-    <div></div>
-    <div class="infoBlock" id="editor-js"></div>
-    <div class="common_button" (click)="addComment()">Отправить</div>
-  </div>
-<!--  Previous comments:-->
-  <div *ngIf="commentsAreReady">
-    <div *ngIf="comments!=undefined">
-      <div class="infoBlock" *ngFor="let comment of comments">
-        <div>{{comment.author.name}}</div>
-        <div [innerHTML]="comment.content">{{comment.content}}</div>
-      </div>
-    </div>
-  </div>
 
+  <!--  Form for comment creating-->
+  <div class="comment__create">
+    <div *ngIf="!isAuth">
+      <form>
+        <div class="horizontal">
+          <label>Имя <input type="text" name="nickname" [(ngModel)]="newComment.author.name"></label>
+          <label> Почта <input type="email" name="email" [(ngModel)]="newComment.author.email"></label>
+        </div>
+        <div class="editorJS" id="editor-js"></div>
+        <div class="button buttonTransparent" (click)="addComment()">Отправить</div>
+      </form>
+    </div>
+    <div *ngIf="isAuth">
+      <form>
+        <div class="horizontal comment__create__form">
+         <app-user-card [userData]="getUser()" flexDirection="column"></app-user-card>
+          <div class="editorJS" id="editor-js"></div>
+        </div>
+        <div class="button buttonTransparent" (click)="addComment(getUser())">Отправить</div>
+      </form>
+    </div>
+
+  </div>
+  <!--  Previous comments:--><div *ngIf="commentsAreReady" class="comment__prev">
+  <div *ngIf="comments!=undefined">
+    <div class="comment__item" *ngFor="let comment of comments">
+      <app-comment-item [comment]="comment"></app-comment-item>
+    </div>
+  </div>
 </div>
+

@@ -1,24 +1,11 @@
 <div class="menu">
-  <div class="menu_item"><a href="" style="padding-left: 10px;">Главная</a></div>
+  <div class="menu_item"><a href="" style="padding-left: 10px;">
+    <img class="menu_img" src="/assets/site_images/dq_logo.png" alt="dq_logo"><img class="menu_img menu_title" src="/assets/site_images/dq_title.png" alt="dq_title">
+  </a></div>
   <div class="menu_item"><a href="/news">Новости</a></div>
   <div class="menu_item"><a href="/games">Игры</a></div>
   <div class="menu_item"><a href="/careers">Вакансии</a></div>
   <div class="menu_item"><a href="/faq">FAQ</a></div>
   <div class="menu_item" *ngIf="fire.userData.role.role_id!==0"><a href="/developer">Разработчику</a></div>
   <div class="menu_item" *ngIf="fire.userData.role.role_id==2"><a href="/admin">Админ-панель</a></div>
-<!--  <div *ngIf="fire.userData.role.role_id!==0" style="display: flex;flex-direction: row">-->
-<!--    <div class="menu_item"></div>-->
-<!--    <div *ngIf="fire.userData.role.role_id==2">-->
-<!--      <div class="menu_item"><a href="/admin">Админ-панель</a></div>-->
-<!--    </div>-->
-<!--  </div>-->
-
-  <div *ngIf="!isUserAuth">
-    <div class="menu_item"><a href="/login">Войти</a></div>
-  </div>
- <div *ngIf="isUserAuth" style="display: flex;flex-direction: row">
-   <div class="menu_item">{{userName}}</div>
-   <div class="menu_item"><a href="/login">Выйти</a></div>
- </div>
-
 </div>

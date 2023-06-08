@@ -1,19 +1,27 @@
 <div>
-  <span>Вход для разработчика</span>
-  <div>
+  <form>
+    <div class="sectionTitle">Вход для разработчика</div>
     <div>
-      <label>
-        Почта
-        <input type="text" name="email" [(ngModel)]="email">
-      </label>
-    </div> <div>
+      <div>
+        <label>
+          Почта
+          <div>
+            <input type="text" name="email" [(ngModel)]="email">
+          </div>
+        </label>
+      </div> <div>
       <label>
         Пароль
-        <input type="password" name="password" [(ngModel)]="password">
+        <div>
+          <input type="password" name="password" [(ngModel)]="password">
+
+        </div>
       </label>
     </div>
-    <div>
-      <button (click)="login()">Войти</button>
+      <div>
+        <div class="buttonTransparent" (click)="login()">Войти</div>
+      </div>
     </div>
-  </div>
+  </form>
+
 </div>

@@ -28,19 +28,21 @@ export class FilteringComponent implements OnInit {
     let sortedNotes = []
     switch (this.option) {
       case('date'): {
-        this.notes = this.notes.map(function (value: { systemDate: Date; date: string | number | Date; }) {
-          value.systemDate = new Date(value.date)
-        })
         switch (this.filterType) {
           case 'new': {
-            sortedNotes = this.notes.sort((objA: { systemDate: { getTime: () => number; }; }, objB: { systemDate: { getTime: () => number; }; }) =>
-              objA.systemDate.getTime() - objB.systemDate.getTime())
+            this.notes.sort(function(note1:any,note2:any) {
+              let dateA:any = new Date(note1.sortDate);
+              let dateB:any = new Date(note2.sortDate);
+              return dateB - dateA;
+            });
             break;
           }
           case 'old': {
-            sortedNotes = this.notes.sort((objA: { systemDate: { getTime: () => number; }; }, objB: { systemDate: { getTime: () => number; }; }) =>
-              objB.systemDate.getTime() - objA.systemDate.getTime())
-            break;
+            this.notes.sort(function(note1:any,note2:any) {
+              let dateA:any = new Date(note1.sortDate);
+              let dateB:any = new Date(note2.sortDate);
+              return dateA - dateB;
+            });
           }
         }
         break;
@@ -48,16 +50,26 @@ export class FilteringComponent implements OnInit {
       case('popularity'): {
         switch (this.filterType) {
           case 'highrate': {
+            this.notes.sort(function(note1:any,note2:any) {
+              return note2.rate - note1.rate;
+            });
             break;
           }
           case 'comments': {
+            this.notes.sort(function(note1:any,note2:any) {
+              if(note1.comments==undefined){
+                note1.comments=[]
+              }
+              if(note2.comments==undefined){
+                note2.comments=[]
+              }
+              return Object.values( note2.comments).length - Object.values( note1.comments).length;
+            });
             break;
           }
         }
         break;
       }
     }
-    this.notes=sortedNotes
-    console.log(sortedNotes)
   }
 }

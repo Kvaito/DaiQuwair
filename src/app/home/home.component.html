@@ -1,34 +1,35 @@
 <div>
   <div class="banner">
-    <div class="title">
-      DAI QUWAIR
-    </div>
   </div>
+  <h4 class="sectionTitle">ГЛАВНЫЕ НОВОСТИ</h4>
   <div>
-<!--    Главные новости (пока последние)-->
-    <div *ngIf="newsReady">
-      <div *ngFor="let note of hotNews">
-        <div><img alt="Обложка записи"></div>
-        <div></div>
+    <div class="hotNewsSlider" *ngIf="newsReady">
+      <div class="hotNewsSlider__item" *ngFor="let note of hotNews">
+        <div><img *ngIf="note.coverUrl!=undefined" alt="Обложка записи" class="hotNewsSlider__cover"
+                  src="{{note.coverUrl}}"></div>
+        <div class="hotNewsSlider__title">{{note.title}}</div>
       </div>
     </div>
   </div>
-<!--  Роадмап-->
+  <!--  Роадмап-->
+  <h4 class="sectionTitle">
+    ДОРОЖНАЯ КАРТА
+  </h4>
   <div>
     <app-home-roadmap></app-home-roadmap>
   </div>
-<!--  Команда-->
-  <div *ngIf="teamReady" class="teamContainer">
-    <div *ngFor="let member of team">
-      <div class="teamMember">
-        <div class="user_avatar_container">
-          <img *ngIf="member.avatarPath!=''" alt="memberAvatar" class="user_avatar" src="{{member.avatarUrl}}">
-          <img *ngIf="member.avatarPath==''" alt="memberAvatar" class="user_avatar" src="assets/site_images/avatar.jpg">
-        </div>
-        <div class="memberName">{{member.name}} {{member.surname}}</div>
-        <div>{{member.position.name}}</div>
+  <h4 class="sectionTitle">
+    Наша команда
+  </h4>
+  <div *ngIf="teamReady" class="team__container">
+    <div *ngFor="let member of team" class="team__member">
+<!--      <app-user-card [userData]="member"></app-user-card>-->
+      <div class="user_avatar_container">
+        <img *ngIf="member.avatarPath!=''" alt="memberAvatar" class="team__avatar" src="{{member.avatarUrl}}">
+        <img *ngIf="member.avatarPath==''" alt="memberAvatar" class="team__avatar" src="assets/site_images/avatar.jpg">
       </div>
+      <div class="team_name">{{member.name}} {{member.surname}}</div>
+      <div>{{member.position.name}}</div>
     </div>
-
   </div>
 </div>

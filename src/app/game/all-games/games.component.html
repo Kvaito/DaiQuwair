@@ -1,0 +1,21 @@
+<div>
+  <div class="sectionTitle">Наши игры</div>
+  <div *ngIf="gamesReady">
+    <div *ngFor="let game of games">
+      <div class="gameBlock " routerLink="/game-page" [queryParams]="{gameTitle:game.gameTitle}">
+        <div class="sectionTitle">{{game.gameTitle}}</div>
+        <div class="horizontal gameBlock__container">
+          <div><img style="width:500px;max-height:400px" src="{{game.coverUrl}}"></div>
+          <div>
+            <div [innerHTML]="game.description">{{game.description}}</div>
+            <div class="tag_container">
+              <div *ngFor="let genre of game.genres">
+                <div class="tag_button">{{genre}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

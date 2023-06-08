@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {RoadmapService} from "../../services/roadmap.service";
 
 @Component({
@@ -9,11 +9,22 @@ import {RoadmapService} from "../../services/roadmap.service";
 export class PointlistComponent implements OnInit {
 
   constructor(public road:RoadmapService) { }
-
+  @Output() startEdit = new EventEmitter()
 
   ngOnInit(): void {
 
   }
 
+  hide(pointId:number){
+    this.road.changePointStatus(pointId,'hidden')
+  }
 
+  show(pointId:number){
+    this.road.changePointStatus(pointId,'shown')
+  }
+
+  editPoint(point:Object){
+    this.road.selectedPoint=point;
+    this.startEdit.emit()
+  }
 }

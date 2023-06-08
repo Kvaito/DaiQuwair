@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import EditorJS from "@editorjs/editorjs";
-import {FireService} from "../services/fire.service";
-import {AuthService} from "../services/auth.service";
+import {FireService} from "../../services/fire.service";
+import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {getDownloadURL} from "firebase/storage";
@@ -32,10 +32,9 @@ export class DeveloperComponent implements OnInit {
 
   async getAuthorNotes() {
     await this.fire.getNotes('author_filter', this.fire.userData.id)
-    this.authorNotes = Object.values(this.fire.notes)
     //If this developer have no notes yet, note list will not appear
-    console.log('Author notes',this.authorNotes)
-    if (this.authorNotes!=undefined) {
+    if (this.fire.notes!=undefined) {
+      this.authorNotes = Object.values(this.fire.notes)
       this.notesAreReady = true
     }
   }
@@ -55,4 +54,8 @@ export class DeveloperComponent implements OnInit {
     this.fire.deleteNote(note.author_id, note.id)
   }
 
+  setImportant(note={status:''},status:string){
+    note.status=status
+    this.fire.setNote(note);
+  }
 }

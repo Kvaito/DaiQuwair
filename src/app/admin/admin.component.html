@@ -1,22 +1,35 @@
-<div class="admin-page">
+<div>
   <div class="actionPanel">
-    <div>
-      <div class="user_avatar_container"><img class="user_avatar" src="assets/site_images/avatar.jpg"></div>
+    <div class="buttonSection">
+      <div class="sectionTitle">Пользователи</div>
+      <div class="button buttonTransparent" (click)="isCreatingUser=!isCreatingUser">Создание пользователя</div>
     </div>
-    <div>
-      <div class="common_button" (click)="isCreatingUser=!isCreatingUser">Создание пользователя</div>
-      <div class="common_button" (click)="isAddingPosition=!isAddingPosition">Управление должностями</div>
-      <div class="common_button" (click)="isTagEditing=!isTagEditing">Управление активными тегами</div>
-      <div class="common_button" (click)="isCareerEditing=!isCareerEditing">Управление вакансиями</div>
-      <div class="common_button" (click)="isFAQAdding=!isFAQAdding">Добавить ответ FAQ</div>
-      <div class="common_button" (click)="isGamesAdding=!isGamesAdding">Добавление игры</div>
+    <div class="buttonSection">
+      <div class="sectionTitle">FAQ</div>
+      <div class="button buttonTransparent" (click)="isFAQAdding=!isFAQAdding">Добавить ответ FAQ</div>
+      <app-faq-list></app-faq-list>
     </div>
-    <div>
-      <div class="common_button" (click)="isPointAdding=!isPointAdding">Добавить пункт</div>
-      <div *ngIf="road.roadmapIsReady"><app-pointlist></app-pointlist></div>
+    <div class="buttonSection">
+      <div class="sectionTitle">Игры</div>
+      <div class="button buttonTransparent" (click)="isGamesAdding=!isGamesAdding">Добавление игры</div>
+    </div>
+    <div class="buttonSection">
+      <div class="sectionTitle">Вакансии</div>
+      <div class="button buttonTransparent" (click)="isCareerEditing=!isCareerEditing">Управление вакансиями</div>
+    </div>
+    <div class="buttonSection">
+      <div class="sectionTitle">Прочее</div>
+      <div class="button buttonTransparent" (click)="isAddingPosition=!isAddingPosition">Управление должностями</div>
+      <div class="button buttonTransparent" (click)="isTagEditing=!isTagEditing">Управление активными тегами</div>
     </div>
   </div>
-  <div class="forms">
+  <div>
+    <div class="button buttonTransparent" (click)="addPoint()">Добавить пункт</div>
+    <div *ngIf="road.roadmapIsReady">
+      <app-pointlist (startEdit)="isPointAdding=true"></app-pointlist>
+    </div>
+  </div>
+  <div class="forms_block">
     <div *ngIf="isGamesAdding">
       <app-add-game></app-add-game>
     </div>
@@ -29,22 +42,27 @@
           <div>{{position.name}}</div>
         </div>
       </div>
-      Добавление должности
       <form>
+        <div class="sectionTitle"> Добавление должности</div>
         <div>
           <label>
             Название должности
-            <input type="text" name="position_name" [(ngModel)]="newPosition.positionName">
+            <div>
+              <input type="text" name="position_name" [(ngModel)]="newPosition.positionName">
+            </div>
           </label><br>
           <label>
             Системное название на английском, без специальных знаков
-            <input type="text" name="system_name" [(ngModel)]="newPosition.systemName">
+            <div>
+              <input type="text" name="system_name" [(ngModel)]="newPosition.systemName">
+            </div>
           </label>
         </div>
-        <button (click)="addPosition()">
+        <div class="button buttonTransparent" (click)="addPosition()">
           Добавить
-        </button>
+        </div>
       </form>
+
     </div>
     <!--    Редактирование тегов-->
     <div *ngIf="isTagEditing">
@@ -55,97 +73,107 @@
       <button (click)="addTag(newTag)">Добавить тег</button>
     </div>
     <!--    Создание пользователя-->
-    <div *ngIf="isCreatingUser">
+    <div *ngIf="isCreatingUser" style="margin-left: 500px">
       <form>
-        <div>
-          <label>
+        <div class="sectionTitle">Добавление пользователя</div>
+        <ul>
+          <li><label>
             <span>Никнэйм</span>
-            <input type="text" name="nickname" required [(ngModel)]="newUser.nickname">
-          </label>
-        </div>
-        <div>
-          <label>
+            <div><input type="text" name="nickname" required [(ngModel)]="newUser.nickname">
+            </div>
+          </label></li>
+          <li><label>
             <span>Имя</span>
-            <input type="text" name="name" required [(ngModel)]="newUser.name">
-          </label>
-        </div>
-        <div>
-          <label>
+            <div>
+              <input type="text" name="name" required [(ngModel)]="newUser.name">
+            </div>
+          </label></li>
+          <li><label>
             <span>Фамилия</span>
-            <input type="text" name="surname" required [(ngModel)]="newUser.surname">
-          </label>
-        </div>
-        <div>
-          <label>
+            <div>
+              <input type="text" name="surname" required [(ngModel)]="newUser.surname">
+            </div>
+          </label></li>
+          <li><label>
             <span>Email</span>
-            <input type="text" name="email" required [(ngModel)]="newUser.email">
-          </label>
-        </div>
-        <div>
-          <label>
+            <div>
+              <input type="text" name="email" required [(ngModel)]="newUser.email">
+            </div>
+          </label></li>
+          <li><label>
             <span>Пароль</span>
-            <input type="text" name="password" required [(ngModel)]="newUser.password">
-          </label>
-        </div>
-        <div>
-          <label>
+            <div><input type="text" name="password" required [(ngModel)]="newUser.password"></div>
+          </label></li>
+          <li><label>
             <span>Роль</span>
-            <select [(ngModel)]="newUser.role" name="role">
-              <option *ngFor="let role of roles" [ngValue]="role">{{role.name}}</option>
-            </select>
-          </label>
-        </div>
-        <div>
-          <label>
+            <div>
+              <select [(ngModel)]="newUser.role" name="role">
+                <option *ngFor="let role of roles" [ngValue]="role">{{role.name}}</option>
+              </select>
+            </div>
+          </label></li>
+          <li><label>
             <span>Должность</span>
-            <select [(ngModel)]="newUser.position" name="position">
-              <option *ngFor="let position of positions" [ngValue]="position">{{position.name}}</option>
-            </select>
-          </label>
-        </div>
-        <button (click)="createUser()">Создать пользователя</button>
+            <div>
+              <select [(ngModel)]="newUser.position" name="position">
+                <option *ngFor="let position of positions" [ngValue]="position">{{position.name}}</option>
+              </select>
+            </div>
+          </label></li>
+        </ul>
+        <div class="button buttonTransparent" (click)="createUser()">Создать пользователя</div>
+
       </form>
     </div>
     <!--    Управление вакансиями-->
-    <div class="manageBlock" *ngIf="isCareerEditing">
+    <div *ngIf="isCareerEditing">
       <form name="careerAdding">
-        Добавление вакансии
+        <div class="sectionTitle">Добавление вакансии</div>
         <ul>
           <li>
             <label>
               <span>Раздел вакансии</span>
-              <select [(ngModel)]="newCareer.section" name="section">
-                <option *ngFor="let section of careerSections" [ngValue]="section">{{section.sectionName}}</option>
-              </select>
+              <div>
+                <select [(ngModel)]="newCareer.section" name="section">
+                  <option *ngFor="let section of careerSections" [ngValue]="section">{{section.sectionName}}</option>
+                </select>
+              </div>
             </label>
           </li>
           <li>
             <label>
               Название
-              <input [(ngModel)]="newCareer.name" type="text" name="title">
+              <div>
+                <input [(ngModel)]="newCareer.name" type="text" name="title">
+              </div>
             </label>
           </li>
           <li>
             <label>
               Короткое описание
-              <input [(ngModel)]="newCareer.shortDescription" type="textarea" name="shortDescr">
+              <div>
+                <input [(ngModel)]="newCareer.shortDescription" type="textarea" name="shortDescr">
+              </div>
             </label>
           </li>
           <li>
             <label>
               Полное описание
-              <input [(ngModel)]="newCareer.fullDescription" type="textarea" name="fullDescr">
+              <div>
+                <input [(ngModel)]="newCareer.fullDescription" type="textarea" name="fullDescr">
+              </div>
             </label>
           </li>
         </ul>
-        <div class="actionButton" (click)="addCareer()">Добавить вакансию</div>
+        <div class="button buttonTransparent" (click)="addCareer()">Добавить вакансию</div>
+
       </form>
     </div>
     <!--    Создание пункта роадмап-->
     <div class="manageBlock" *ngIf="isPointAdding">
       <app-add-roadpoint></app-add-roadpoint>
     </div>
-<!--    FAQ управление-->
+    <!--    FAQ управление-->
     <div *ngIf="isFAQAdding">
       <app-faq-add></app-faq-add>
     </div>

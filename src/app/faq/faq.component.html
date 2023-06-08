@@ -1,13 +1,12 @@
 <div>
-  Часто задаваемые вопросы:
   <div *ngIf="faqIsReady">
     <div class="section" *ngFor="let section of FAQ">
       <div class="sectionTitle">{{section[0].section.name}}</div>
-      <div class="sectionItem" *ngFor="let question of section">
-        <div class="question">
+      <div class="sectionItem question " *ngFor="let question of section">
+        <div class="question__text underline" (click)="question.reveal=!question.reveal">
           {{question.question}}
         </div>
-        <div class="answer" [innerHTML]="question.answer">
+        <div class="question__answer" *ngIf="question.reveal" [innerHTML]="question.answer">
           {{question.answer}}
         </div>
       </div>

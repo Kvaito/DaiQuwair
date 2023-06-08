@@ -1,40 +1,44 @@
-<div>
-  <div class="posMessage" *ngIf="message!=''">{{message}}</div>
-  <form>
-    Пункт "{{newPoint.title}}"
-    <ul>
-      <li>
-        <label>Название <input [(ngModel)]="newPoint.title" type="text" name="title"></label>
-      </li>
-      <li>
-        <label>Описание <input [(ngModel)]="newPoint.description" type="textarea" name="title"></label>
-      </li>
-      <li>
-        <label>Дата начала <input [(ngModel)]="newPoint.start" type="date" name="start"></label>
-      </li>
-      <li>
-        <label>Дата окончания <input [(ngModel)]="newPoint.deadline" type="date" name="deadline"></label>
-      </li>
-    </ul>
-  </form>
-<!--  New task-->
-  <div *ngFor="let task of newPoint.tasks">
-    Задача "{{task.title}}"
+<div class="horizontal">
+  <div>
     <form>
+      <div class="posMessage" *ngIf="message!=''">{{message}}</div>
+      <div>Пункт "{{selectedPoint.title}}"</div>
       <ul>
-        <li><label>Название <input [(ngModel)]="task.title" type="text" name="title"></label></li>
-        <li><label>Описание <input [(ngModel)]="task.description" type="textarea" name="title"></label></li>
-        <li><label>
-          <select [(ngModel)]="task.position" name="position">
-            <option *ngFor="let position of positions" [ngValue]="position">{{position.name}}</option>
-          </select>
+        <li>
+          <label>Название <div><input [(ngModel)]="selectedPoint.title" type="text" name="title"></div></label>
+        </li>
+        <li>
+          <label>Описание <div><input [(ngModel)]="selectedPoint.description" type="textarea" name="title"></div></label>
+        </li>
+        <li>
+          <label>Дата начала <div><input [(ngModel)]="selectedPoint.start" type="date" name="start"></div> </label>
+        </li>
+        <li>
+          <label>Дата окончания <div><input [(ngModel)]="selectedPoint.deadline" type="date" name="deadline"></div> </label>
+        </li>
+      </ul>
+      <div class="button buttonTransparent" (click)="addTaskForm()">Добавить задачу</div>
+      <div class="button buttonTransparent" (click)="createPoint()">
+        Добавить пункт
+      </div>
+    </form>
+  </div>
+<!--  New task-->
+  <div *ngFor="let task of selectedPoint.tasks" style="margin-left: 100px">
+    <form>
+      Задача "{{task.title}}"
+      <ul>
+        <li><label>Название <div><input [(ngModel)]="task.title" type="text" name="title"></div></label></li>
+        <li><label>Описание <div><input [(ngModel)]="task.description" type="textarea" name="title"></div></label></li>
+        <li><label>Необходимый специалист
+          <div>
+            <select [(ngModel)]="task.position" name="position">
+              <option *ngFor="let position of positions" [ngValue]="position">{{position.name}}</option>
+            </select>
+          </div>
         </label>
         </li>
       </ul>
     </form>
-  </div>
-  <div class="actionButton" (click)="addTaskForm()">Добавить задачу</div>
-  <div class="actionButton" (click)="createPoint()">
-    Добавить пункт
   </div>
 </div>

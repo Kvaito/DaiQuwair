@@ -72,6 +72,19 @@ export class AdminComponent implements OnInit {
     this.auth.createUser(this.newUser)
   }
 
+  addPoint(){
+    this.isPointAdding=true;
+    this.road.selectedPoint={
+      id:this.fire.generateId(),
+      title:'',
+      deadline:'',
+      start:'',
+      description:'',
+      status:'shown',
+      tasks:[]
+    }
+  }
+
   async addTag(tagString: string) {
     const db = getDatabase()
     await push(ref(db, 'system/tags/'), {

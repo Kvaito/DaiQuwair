@@ -1,8 +1,19 @@
-.create_comment_form{
-  background-color: white;
+.comment__create{
   margin-top: 20px;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 20px;
 }
+.comment__create__form{
+  width: 100%;
+}
+.comment__prev{
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
 #editor-js{
  height: 200px;
   overflow-y: auto;
+  padding-left: 0;
 }

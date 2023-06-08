@@ -1,5 +1,5 @@
 .menu{
-background-color:#677A7C;
+  background-color: var(--blockBackground);
   display: flex;
   flex-direction: row;
   height: 40px;
@@ -24,6 +24,16 @@ background-color:#677A7C;
 
 .menu_item>a{
   color: white;
+  display: flex;
   text-decoration: none;
+  justify-content: center;
+  align-items: center;
 }
 
+.menu_img{
+  height: 40px;
+}
+
+.menu_title{
+ height: 20px;
+}

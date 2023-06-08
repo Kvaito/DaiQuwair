@@ -1,0 +1,57 @@
+<div>
+  <div style="display: flex;flex-direction: column">
+    <div class="user__block">
+      <div class="user__avatar avatar" [ngStyle]="{'background-image':'url('+fire.userData.avatarUrl+')'}"></div>
+      <div>
+        <div class="user__nickname">{{fire.userData.nickname}}</div>
+        <div>{{fire.userData.name}} {{fire.userData.surname}}</div>
+        <div>{{fire.userData.position.name}}</div>
+        <div class="button buttonTransparent" (click)="isUserEditing=!isUserEditing">Редактирование профиля</div>
+      </div>
+    </div>
+    <div class="underline padding"></div>
+<!--Note list-->
+    <div class="lists_block">
+      <div>
+        <div *ngIf="notesAreReady" class="list">
+          <div>
+            <div class="sectionTitle listTitle">Мои записи</div>
+          </div>
+          <div class="button buttonTransparent newNoteButton" (click)="isNoteCreating=!isNoteCreating">Создать запись</div>
+          <div *ngFor="let note of authorNotes">
+            <div class="listItem">
+              <div class="button buttonIcon" routerLink="/note" [queryParams]="{noteId:note.id}">{{note.title}}</div>
+              <div class="listButtonContainer">
+                <div class="listButton">
+                  <div class="button buttonIcon" *ngIf="note.status=='important'" (click)="setImportant(note,'usual')">★</div>
+                  <div class="button buttonIcon" *ngIf="note.status=='usual'" (click)="setImportant(note,'important')"> ☆</div>
+                </div>
+                <div class="button buttonIcon" (click)="changeEditingNote(note)">Редактировать</div>
+                <div class="button buttonIcon" (click)="deleteNote(note)">Удалить</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!notesAreReady">
+        Записей нет
+      </div>
+      <div>
+        <app-tasklist-developer></app-tasklist-developer>
+      </div>
+    </div>
+  </div>
+  <div class="formsBlock" style="margin-left: 500px">
+    <div *ngIf="isNoteCreating">
+      <app-add-note></app-add-note>
+    </div>
+    <div *ngIf="isNoteEditing">
+      <app-edit-note></app-edit-note>
+    </div>
+    <div *ngIf="isUserEditing">
+      <app-developer-edit></app-developer-edit>
+    </div>
+  </div>
+
+</div>
+

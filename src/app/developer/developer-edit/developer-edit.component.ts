@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FireService} from "../services/fire.service";
+import {FireService} from "../../services/fire.service";
 import {getDownloadURL} from "firebase/storage";
 import {getStorage, ref as storageRef} from "@angular/fire/storage";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
@@ -19,11 +19,13 @@ export class DeveloperEditComponent implements OnInit {
     password:'',
     avatarPath:''
   }
+    oldAvatarPath:string=''
     repeatPassword:string=''
     imageData:any={}
     message:string=''
   ngOnInit(): void {
     this.userData=this.fire.userData
+    this.oldAvatarPath=this.userData.avatarPath
     this.userData.avatarPath=''
     this.repeatPassword=this.userData.password
   }
@@ -40,13 +42,29 @@ export class DeveloperEditComponent implements OnInit {
   }
 
   editProfile(){
-    if(this.userData.password==this.repeatPassword){
+    if(this.validatePassword(this.userData.password,this.repeatPassword)){
+      if(this.imageData==undefined){
+        this.userData.avatarPath=this.oldAvatarPath
+      }
       this.fire.setUserData(this.userData)
       this.message='Изменения сохранены'
     }
-    else{
-      this.message='Повторите пароль верно'
-    }
   }
 
+  validatePassword(newPassword:string,repeatPassword:string){
+    let regular = /^(?=.*\d)(?=.*[!@#$%^&_*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    if(regular.test(newPassword)){
+      if(newPassword==repeatPassword){
+        return true
+      }
+      else{
+        this.message='Повторите пароль верно'
+        return false
+      }
+    }else{
+      this.message='Пароль должен быть минимум длиной 8 символов и содержать минимум одну букву, одну цифру, ' +
+        'один специальный символ буквы разного регистра. Безопасность важна ;)'
+      return false;
+    }
+  }
 }

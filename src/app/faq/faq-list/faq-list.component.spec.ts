@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FaqEditComponent } from './faq-edit.component';
+import { FaqListComponent } from './faq-list.component';
 
-describe('FaqEditComponent', () => {
-  let component: FaqEditComponent;
-  let fixture: ComponentFixture<FaqEditComponent>;
+describe('FaqListComponent', () => {
+  let component: FaqListComponent;
+  let fixture: ComponentFixture<FaqListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FaqEditComponent ]
+      declarations: [ FaqListComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FaqEditComponent);
+    fixture = TestBed.createComponent(FaqListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,5 +1,13 @@
 :root{
-  --blockBackground:677A7CE5;
+  --blockBackground: rgba(91, 134, 133, 0.9);
+  --darkBackground:#263b3d;
+  --importantButtonColor: #609da4;
+  --importantButtonColorActive: #89ced7;
+  --neutralButtonColor:#263b3d;
+  --neutralButtonColorActive: #344d4f;
+  --borderRadius:6px;
+  --border:3px solid white;
+  --underlineColor: var(--blockBackground);
 }
 
 html {
@@ -10,11 +18,28 @@ html {
   outline: none;
 }
 
+body::-webkit-scrollbar {
+  display: none               /* ширина scrollbar */
+}
+*::-webkit-scrollbar {
+  width: 8px;               /* ширина scrollbar */
+}
+*::-webkit-scrollbar-track {
+  background: var(--darkBackground);        /* цвет дорожки */
+}
+*::-webkit-scrollbar-thumb {
+  background-color:var(--blockBackground);    /* цвет плашки */
+  border-radius: 15px;       /* закругления плашки */
+}
+
 ul {
   list-style-type: none;
   list-style-position: outside;
+  padding: 0;
 }
-
+li{
+  margin: 0;
+}
 body {
   font-family: "Century Gothic", serif;
   font-size: 20px;
@@ -24,39 +49,53 @@ body {
   background-attachment: fixed;
   background-size: cover;
 }
-
+::selection{
+  background-color: var(--neutralButtonColorActive);
+  color: black;
+}
 main {
   /*margin-left: 20%;*/
   /*margin-right: 20%;*/
-  margin-top: 100px;
+  margin-top: 60px;
   color: white;
+  min-height: calc(100vh - 70px);
 }
 
-/*Блоки*/
-.sectionTitle{
+a:active, a:hover, a {
+  text-decoration: none;
+  color: white;
+}
+/*Blocks*/
+.contentSection{
+  padding: 10px;
+}
+
+.blockBackground {
+  background-color: var(--blockBackground);
+  padding: 10px;
+}
+.blockTransparent{
+  padding: 10px;
+}
+
+.horizontal{
+ display: flex;
+  flex-direction: row;
+}
+.column{
   display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 30px;
+  flex-direction: column;
 }
-
-.testblock {
-  background-color: #100923;
-  color: white;
+.padding{
+  height: 40px;
 }
-
-.manageBlock {
-  background-color: white;
-  padding: 5px;
-  margin: 5px;
+.underline{
+  box-shadow: 0 3px 0 var(--blockBackground);
 }
-
-.infoBlock {
-  background-color: #559eb4;
-  padding: 5px;
-  margin: 5px;
+.flexRow{
+  display: flex;
+  flex-direction: row;
 }
-
 /* tags */
 .tag_container {
   display: flex;
@@ -66,66 +105,67 @@ main {
 
 /*Buttons*/
 .button {
-
-}
-
-.common_button {
   display: flex;
   justify-content: center;
   align-items: center;
+  max-width: 200px;
+  padding: 5px;
+  height: 30px;
+  margin-top: 5px;
+  transition: background-color 0.5s;
+}
+.button:hover{
+  cursor: pointer;
+}
+.buttonTransparent {
+  border:var(--border);
+}
+
+.buttonTransparent:hover {
   background-color: white;
-  min-width: 100px;
-  max-width: 200px;
-  padding: 5px;
-  height: 30px;
-  margin: 5px;
+  color:black;
 }
 
-.common_button:hover {
-  cursor: pointer;
-  background-color: #b2d5d5;
-}
-
-.tag_button {
-  background-color: #100923;
+.tagButton {
+  background-color: var(--darkBackground);
   color: white;
-  margin-left: 10px;
 }
 
-.tag_button:hover {
-  background-color: #25164f;
+.tagButton:hover {
+  background-color: var(--neutralButtonColor);
   cursor: pointer;
 }
 
-.actionButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #16393f;
+.buttonPainted {
+  color:black;
+  background-color: white;
+}
+
+.buttonPainted:hover{
+  color:white;
+  border:var(--border);
+  background-color: transparent;
+}
+
+.buttonIcon{
+
   color: white;
-  min-width: 100px;
-  max-width: 200px;
-  padding: 5px;
-  height: 30px;
-  margin: 5px;
+  background-color: transparent;
+  margin-right: 10px;
 }
-
-.actionButton {
+.buttonIcon:hover{
   cursor: pointer;
-  background-color: #1f4850;
-}
-
-/*Аватарки*/
-.user_avatar_container {
+  color: black;
+  background-color: white;
 
 }
-
-.user_avatar {
-  width: 120px;
-  height: 150px;
+/*IMAGES*/
+.avatar {
+  aspect-ratio: 1/1;
+  border-radius: var(--borderRadius);
 }
 
-/*Уведомления*/
+/*Notifications*/
 .posMessage {
   height: 50px;
   margin: 5px;
@@ -135,26 +175,24 @@ main {
   border: 1px solid #5bb671;
 }
 
-/*Списки*/
+/*LISTS*/
 .list {
   margin: 20px;
   display: flex;
   flex-direction: column;
   min-width: 300px;
-  border-radius: 15px;
-  border: 1px solid black;
+  padding-bottom: 20px;
+  border-radius: var(--borderRadius);
+  background-color: var(--blockBackground);
 }
 
 .listTitle {
-  border-radius: 15px 15px 0 0;
-  background-color: #33333D;
-  color: white;
   padding: 5px;
+  font-size: 30px;
 }
 
 .listItem {
-  background-color: #A5D0E8;
-  height: 40px;
+  min-height: 40px;
   justify-content: space-between;
   align-items: center;
   display: flex;
@@ -162,6 +200,8 @@ main {
   margin-top: 10px;
   margin-left: 10px;
   margin-right: 10px;
+  border:var(--border);
+  /*box-shadow: 0 3px 0 white;*/
 }
 
 .listButtonContainer {
@@ -169,15 +209,100 @@ main {
   flex-direction: row;
 }
 
-.listButton {
-  width: 35px;
-  height: 35px;
-  background-color: white;
-  margin-left: 5px;
+/*TEXT*/
+.text_shadow{
+  text-shadow: 0px 0px 10px #000
 }
 
-.listButton:hover {
-  background-color: #a7bbea;
-  cursor: pointer;
+.sectionTitle{
+  letter-spacing: 0px;
+  text-transform: uppercase;
+  font-size: 30px;
+  color: #ffffff;
+  text-align: center;
+  font-style: inherit;
+  font-weight: inherit;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: 0;
 }
-/* Слайдер */
+.sectionTitle>span{
+  line-height: 26px
+}
+
+/*FORMS*/
+input{
+  color: white;
+  background-color: transparent;
+  border: none;
+  box-shadow: 0 3px 0 var(--underlineColor);
+  width: 250px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-family: unset;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  max-width: 100%;
+  margin: 0 auto;
+  border: var(--border);
+  padding: 20px;
+}
+
+select{
+  appearance: none;
+  background: transparent;
+  font-size: 20px;
+  border-radius: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  color: white;
+  box-shadow: 0 3px 0 var(--underlineColor);
+}
+option{
+  background-color:var(--blockBackground);
+  display:block;
+  color: white;
+  border:2px solid black;
+}
+option:hover{
+  background-color: #5bb671;
+}
+/*use with span tag, class fix with label*/
+.inputFile input[type=file] {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  display: block;
+  width: 0;
+  height: 0;
+}
+
+/*EditorJs*/
+#editorJS{
+  display: flex;
+  justify-content: left;
+  width: 100%;
+}
+.codex-editor__redactor{
+  padding-bottom: 0 !important;
+}
+.ce--toolbar{
+  color: black;
+  border-radius: var(--borderRadius);
+}
+.ce-inline-toolbar{
+  color: black;
+  border-radius: var(--borderRadius);
+}
+.ce-popover{
+  color: black;
+}
+.ce--settings{
+  left: unset;
+}

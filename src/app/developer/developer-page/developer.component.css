@@ -1,0 +1,29 @@
+.user__block{
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-column-gap: 10px;
+  margin: 20px;
+}
+.user__avatar{
+  background-size: cover;
+}
+.user__nickname{
+  font-size: 30px;
+}
+.lists_block{
+  display: flex;
+  flex-direction: row;
+}
+.lists_block>div{
+  width: 50%;
+}
+.formsBlock{
+  display: grid;
+  margin: 20px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 10px;
+}
+.newNoteButton{
+  margin: 10px;
+  width: 100%;
+}

@@ -1,28 +1,34 @@
 <div class="testblock">
-  <div><input type="text" placeholder="Заголовок" [(ngModel)]="note.title"></div>
-  <div id="editor-js"></div>
-  Обложка записи
-  <div  *ngIf="imageData.imageUploaded"><img style="width: 200px;height: 200px" [src]=imageData.downloadUrl></div>
-  <div><input type="file" (change)="uploadImage($event)" name="file" accept="*.png.jpg"></div>
-  <div>Введите теги для фильтрации через пробел
-    <input type="text" placeholder="Теги" [(ngModel)]="note.tags"></div>
-  <div>
-    <label>Выбор из активных тегов</label>
-<!--    <form [formGroup]="checkboxTags">-->
-<!--      <fieldset>-->
-<!--        <div *ngFor="let tag of fire.systemData.tags">-->
-<!--          <input type="checkbox" value="{{tag.tagName}}">{{tag.tagName}}-->
-<!--        </div>-->
-<!--      </fieldset>-->
-<!--    </form>-->
-  </div>
-  <div>
-    <label>
-      <span>Игра</span>
-      <select [(ngModel)]="note.game" name="role">
-              <option *ngFor="let game of games" [ngValue]="game.gameTitle">{{game.gameTitle}}</option>
-            </select>
-    </label>
-  </div>
-  <button (click)="saveNote()">Добавить запись</button>
+  <form>
+    <div class="sectionTitle">Создание записи</div>
+    <div>Заголовок
+      <div><input type="text" name="title" [(ngModel)]="note.title"></div>
+    </div>
+    <div>
+      Текст записи
+      <div id="editor-js"></div>
+    </div>
+    <div *ngIf="imageData.imageUploaded"><img style="width: 200px;height: 200px" [src]=imageData.downloadUrl></div>
+    <div>
+      <label class="inputFile">
+        <input type="file" (change)="uploadImage($event)" name="file" accept="*.png.jpg">
+        <span class="inputFile__button button buttonTransparent">Загрузить обложку</span>
+      </label>
+     </div>
+    <div>Введите теги для фильтрации через пробел
+      <div>
+        <input type="text" placeholder="Теги" name='tags' [(ngModel)]="note.tags"></div>
+    </div>
+    <div>
+    </div>
+    <div>
+      <label>
+        <span>Игра</span>
+        <select [(ngModel)]="note.game" name="role">
+          <option *ngFor="let game of games" [ngValue]="game.gameTitle">{{game.gameTitle}}</option>
+        </select>
+      </label>
+    </div>
+    <div class="button buttonTransparent" (click)="saveNote()">Добавить запись</div>
+  </form>
 </div>

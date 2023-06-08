@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import EditorJS from "@editorjs/editorjs";
 import {FireService} from "../../services/fire.service";
+import {FaqService} from "../../services/faq.service";
 
 @Component({
   selector: 'app-faq-add',
@@ -9,7 +10,7 @@ import {FireService} from "../../services/fire.service";
 })
 export class FaqAddComponent implements OnInit {
 
-  constructor(private fire:FireService) { }
+  constructor(private fire:FireService,private faq:FaqService) { }
 
   FAQuestion:any={
     id:'',
@@ -44,7 +45,7 @@ export class FaqAddComponent implements OnInit {
       this.FAQuestion.answer = outputData.blocks
     })
     console.log(this.FAQuestion)
-    await this.fire.addFAQ(this.FAQuestion)
+    await this.faq.addFAQ(this.FAQuestion)
   }
 
 }

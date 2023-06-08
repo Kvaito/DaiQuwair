@@ -1,0 +1,39 @@
+<div>
+  <form>
+    <div class="sectionTitle">Добавление игры</div>
+    <ul>
+      <li>
+        <label>
+          <span>Название игры</span>
+          <div> <input type="text" name="title" [(ngModel)]="game.gameTitle" ></div>
+        </label>
+      </li>
+      <li>
+        <label>
+          <span>Название в системе</span>
+          <div><input type="text" name="title" [(ngModel)]="game.systemName" ></div>
+        </label>
+      </li>
+      <li>
+        <label>
+          Введите жанры игры на английском через пробел
+          <div> <input type="text" name="genres" [(ngModel)]="genresRaw"></div>
+        </label>
+      </li>
+      <li>
+        <label>
+          <span>Описание игры</span>
+          <div> <div id="editor-js"></div></div>
+        </label>
+      </li>
+      <li>
+        <div  *ngIf="coverUploaded"><img alt="gameCover" style="width: 200px;height: 200px" [src]=fire.actualImageDownloadUrl></div>
+        <label class="inputFile">
+              <input type="file" (change)="uploadImage($event)" name="file" accept="*.png.jpg">
+              <span class="inputFile__button button buttonTransparent">Загрузить обложку</span>
+            </label>
+      </li>
+    </ul>
+    <div class="button buttonTransparent" (click)="createGame()">Добавить игру</div>
+  </form>
+</div>

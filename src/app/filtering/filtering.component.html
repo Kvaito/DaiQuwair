@@ -1,11 +1,11 @@
-<div class="filters_container">
-  <div class="common_button">
+<div class="filter__container">
+  <div >
     <select [(ngModel)]="option">
       <option value="date">По дате</option>
       <option value="popularity">По популярности</option>
     </select>
   </div>
-  <div class="common_button">
+  <div>
     <select [(ngModel)]="filterType" *ngIf="option=='date'" (change)="filterNotes()">
       <option value="new">Самые новые</option>
       <option value="old">Самые старые</option>

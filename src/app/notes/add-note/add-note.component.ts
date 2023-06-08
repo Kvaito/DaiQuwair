@@ -21,8 +21,10 @@ export class AddNoteComponent implements OnInit {
     content:'',
     date:'',
     tags:[],
+    status:'usual',
     id:'',
-    game:'Studio News'
+    game:'Studio News',
+    rawDate:''
   }
   imageData={
     localPath:'',
@@ -46,39 +48,42 @@ export class AddNoteComponent implements OnInit {
         },
       },
       holder: 'editor-js',
-      placeholder: 'Расскажи, что произошло!',
+      placeholder: 'Такооооое было',
       autofocus: true
     })
   }
 
   async saveNote() {
-    //Получение данных из блока editor.js
+    //Getting data from editor.js blocks
     await this.editor.save().then((outputData: any) => {
       this.note.content = outputData.blocks
     }).catch((error: any) => {
       console.log('Saving failed: ', error)
     });
-    //Получение нынешней даты и преобразование на русский язык
-    this.note.date = new Date().toLocaleString('ru', {
+    //Getting current date and creating needed view for this
+    this.note.rawDate = new Date()
+    this.note.sortDate=this.note.rawDate.toLocaleDateString('en-US')
+      this.note.date=this.note.rawDate.toLocaleString('ru', {
       year: 'numeric',
       month: 'long',
       day: 'numeric'
     });
     this.note.author = this.fire.userData.nickname
     this.note.author_id=this.fire.userData.id
-    //Создание идентификатора записи
-    this.note.id=new Date().getTime()
+    //Creating note identificator
+    this.note.id=this.fire.generateId();
     if(this.note.tags!=''){
       this.note.tags=this.determineTags(this.note.tags)
     }
     // this.addCheckboxTagToList()
+    console.log(this.note)
     await this.fire.setNote(this.note)
   }
 
   async uploadImage($event: any) {
     this.imageData.localPath = $event.target.files[0]
-    this.imageData.cloudPath = "/note_covers/" + this.fire.userData.id + "/" + Math.random()
-    //Загрузка картинки
+    this.imageData.cloudPath = "/note_covers/" + this.fire.userData.id + "/" + this.fire.generateId()
+    //Cover upload and getting url to show it
     this.FireStorage.upload(this.imageData.cloudPath, this.imageData.localPath).then( async () => {
       this.imageData.downloadUrl = await getDownloadURL(storageRef(getStorage(), this.imageData.cloudPath))
       this.imageData.imageUploaded=true
@@ -89,7 +94,11 @@ export class AddNoteComponent implements OnInit {
   //Работа с тегами
   determineTags(tagsString:string){
     let tagsArray:Array<any>=[]
-    tagsArray=tagsString.split(' ')
+    if(tagsString==''){
+      tagsArray=['?']
+    }else{
+      tagsArray=tagsString.split(' ')
+    }
     return tagsArray
   }
   addCheckboxTagToList(){

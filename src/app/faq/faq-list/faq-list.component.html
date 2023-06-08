@@ -1,0 +1,7 @@
+<div class="faq__list list">
+  <div  *ngFor="let section of faq.FAQ">
+    <div class="listItem" *ngFor="let question of section">
+      <div>{{question.question}}</div>
+    </div>
+  </div>
+</div>

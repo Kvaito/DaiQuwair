@@ -114,14 +114,15 @@ export class FireService {
       tags:note.tags,
       game:note.game,
       id:note.id,
+      status:note.status,
       comments:[],
+      sortDate:note.sortDate,
       rate:0
     })
   }
 
   //Получение записей с возможностью использовать фильтры
   // 'author_filter' - поиск по автору
-  // 'hot' - главные новости
   // 'fromId' - получить отдельную запись по ID
   async getNotes(options:any='',author:string='',noteId:number=0){
     switch (options){
@@ -146,16 +147,6 @@ export class FireService {
         break;
       }
       //Select only main news
-      case 'hot':{
-        await get(child(this.dbRef, "notes/"))
-          .then((snapshot) => {
-            if (snapshot.exists()) {
-              this.notes=snapshot.val()
-            }
-            //Searching for main
-          })
-        break;
-      }
       case 'fromId':{
         await get(child(this.dbRef, "notes/"))
           .then((snapshot) => {
@@ -223,26 +214,6 @@ export class FireService {
     //обработка жанров
     await set(ref(this.db, 'system/games/' + game.systemName + '/'), game);
     console.log('Игра добавлена')
-  }
-
-  //FAQ
-  async addFAQ(question:any){
-    question.id=this.generateId()
-    await set(ref(this.db, 'faq/' + question.section.systemName+'/'+question.id), {
-      id:question.id,
-      question:question.question,
-      answer:question.answer,
-      section:question.section
-    })
-  }
-
-  async getFAQ(){
-    await get(child(this.dbRef, "faq/"))
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          this.faq = snapshot.val();
-        }
-      })
   }
 
   //Helpful tools

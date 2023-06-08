@@ -1,7 +1,38 @@
-.title{
-color:white;
-  font-size: 30px;
+.note{
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-left: 10%;
+  margin-right: 10%;
 }
-.rate{
-  color:white;
+.note__coverContainer{
+  width:40%;
+  aspect-ratio: 1/1;
+  margin-right: 20px;
+}
+.note__cover{
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+}
+.note__text{
+  width: 50%;
+}
+.note__description{
+  -webkit-line-clamp: 12; /* Число отображаемых строк */
+  display: -webkit-box; /* Включаем флексбоксы */
+  -webkit-box-orient: vertical; /* Вертикальная ориентация */
+  overflow: hidden; /* Обрезаем всё за пределами блока */
+  padding: 20px;
+}
+.note__title{
+  font-size: 25px;
+  padding: 20px;
+}
+.note__rate{
+  padding: 20px;
+  margin-bottom: 0;
+}
+.underline{
+  padding: 20px;
 }

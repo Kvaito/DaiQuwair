@@ -1,0 +1,12 @@
+.gameBlock{
+  background-color:var(--blockBackground);
+  padding-left: 20%;
+  padding-right: 20%;
+  margin-bottom: 20px;
+}
+.gameBlock:hover{
+  cursor: pointer;
+}
+.gameBlock__container>div{
+  padding: 10px;
+}

@@ -1,0 +1,6 @@
+.comment__item__name{
+  color: var(--blockBackground);
+}
+.comment__item{
+  margin-bottom: 20px;
+}

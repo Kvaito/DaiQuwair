@@ -14,6 +14,7 @@ export class AuthService {
   userAuthData: any = {}
   userName: any = {}
   userIsReady:boolean=false
+  userIsAuth:boolean=false
 
   createUser(userData: any) {
     this.fireauth.createUserWithEmailAndPassword(userData.email, userData.password).then(() => {
@@ -22,25 +23,37 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-    this.fireauth.signInWithEmailAndPassword(email, password).then((cred) => {
-      this.isAuth()
-      this.router.navigate([''])
+    this.fireauth.signInWithEmailAndPassword(email, password).then(async (cred) => {
+      await this.isAuth()
+      await this.router.navigate([''])
     })
   }
 
-  //Отслеживание, вошёл пользователь или нет
+  logout(){
+    this.fireauth.signOut().then(()=> {
+      this.fire.userData= {
+        role:{
+          role_id:0
+        }
+      }
+      this.router.navigate(['/login'])
+    }, function(error) {
+      // An error happened.
+    });
+  }
+  //Spectate user authentication
   async isAuth() {
     await this.fireauth.onAuthStateChanged(async user => {
       if (user) {
         this.userAuthData = user;
-        //получение данных пользователя из базы данных
+        //Getting user data from database
         await this.fire.getUserData(this.userAuthData.email)
         this.userIsReady = true
+        this.userIsAuth=true
       } else {
         this.userIsReady = true
-        console.log('Пользователь не авторизован')
+        this.userIsAuth=false
       }
-
     })
   }
 }
