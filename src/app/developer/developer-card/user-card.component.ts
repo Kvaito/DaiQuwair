@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {getDownloadURL, getStorage, ref as storageRef} from "@angular/fire/storage";
+import {Developer} from "../../../models/Developer";
 
 @Component({
   selector: 'app-user-card',
@@ -11,24 +12,17 @@ export class UserCardComponent implements OnInit {
   constructor() {
   }
 
-  @Input() userData = {
-    name: '',
-    surname: '',
-    position: {name: '', systemName: ''},
-    avatarUrl:'',
-    avatarPath:''
-  }
+  @Input()
+  userData:any;
   @Input() flexDirection='horizontal'
   @Input() nameColor='white'
-
+  avatarUrl=''
   ngOnInit(): void {
     this.getUserAvatar()
   }
 
   async getUserAvatar() {
-    this.userData.avatarUrl = await getDownloadURL(storageRef(getStorage(), this.userData.avatarPath))
-    console.log(this.userData.avatarUrl)
-
+    this.avatarUrl = await getDownloadURL(storageRef(getStorage(), this.userData.avatarPath))
   }
 
 

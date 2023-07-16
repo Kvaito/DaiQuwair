@@ -1,0 +1,6 @@
+<div class="game__list list">
+    <div class="listItem" *ngFor="let game of gameList">
+      <div>{{game.gameTitle}}</div>
+      <div class="buttonIcon edit" (click)="edit(game)"></div>
+    </div>
+</div>

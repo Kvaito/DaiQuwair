@@ -29,7 +29,7 @@
   position: absolute;
   display: flex;
   flex-direction: column;
-  margin-left: calc(5%- 40px);
+  margin-left: calc(5% - 40px);
 }
 .rate div{
   width: 40px;

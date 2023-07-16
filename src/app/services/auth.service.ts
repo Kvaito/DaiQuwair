@@ -31,11 +31,7 @@ export class AuthService {
 
   logout(){
     this.fireauth.signOut().then(()=> {
-      this.fire.userData= {
-        role:{
-          role_id:0
-        }
-      }
+      this.fire.userData.role.role_id=0
       this.router.navigate(['/login'])
     }, function(error) {
       // An error happened.

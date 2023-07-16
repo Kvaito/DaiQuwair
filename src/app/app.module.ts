@@ -18,14 +18,12 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { LoginComponent } from './login/login.component';
 import { EditNoteComponent } from './notes/edit-note/edit-note.component';
 import { AddNoteComponent } from './notes/add-note/add-note.component';
-import { AddGameComponent } from './game/add-game/add-game.component';
 import { EditGameComponent } from './game/edit-game/edit-game.component';
 import { GamePageComponent } from './game/game-page/game-page.component';
 import { AddRoadpointComponent } from './roadmap/add-roadpoint/add-roadpoint.component';
 import { PointlistComponent } from './roadmap/pointlist/pointlist.component';
 import { TasklistDeveloperComponent } from './roadmap/tasklist-developer/tasklist-developer.component';
 import { TasklistFromPointComponent } from './roadmap/tasklist-from-point/tasklist-from-point.component';
-import { FaqAddComponent } from './faq/faq-add/faq-add.component';
 import { HomeRoadmapComponent } from './roadmap/home-roadmap/home-roadmap.component';
 import { CommentsComponent } from './comments/comments.component';
 import { DeveloperEditComponent } from './developer/developer-edit/developer-edit.component';
@@ -34,6 +32,14 @@ import { FaqListComponent } from './faq/faq-list/faq-list.component';
 import { UserCardComponent } from './developer/developer-card/user-card.component';
 import { CommentCreateComponent } from './comments/comment-create/comment-create.component';
 import { CommentItemComponent } from './comments/comment-item/comment-item.component';
+import { AdminListComponent } from './admin-list/admin-list.component';
+import { DeveloperFormComponent } from './developer/developer-form/developer-form.component';
+import { FaqFormComponent } from './faq/faq-form/faq-form.component';
+import { GameFormComponent } from './game/game-form/game-form.component';
+import { NoteFormComponent } from './notes/note-form/note-form.component';
+import { GameListComponent } from './game/game-list/game-list.component';
+import {Game} from "../models/Game";
+import {Developer} from "../models/Developer";
 
 @NgModule({
   declarations: [
@@ -51,14 +57,12 @@ import { CommentItemComponent } from './comments/comment-item/comment-item.compo
     LoginComponent,
     EditNoteComponent,
     AddNoteComponent,
-    AddGameComponent,
     EditGameComponent,
     GamePageComponent,
     AddRoadpointComponent,
     PointlistComponent,
     TasklistDeveloperComponent,
     TasklistFromPointComponent,
-    FaqAddComponent,
     HomeRoadmapComponent,
     CommentsComponent,
     DeveloperEditComponent,
@@ -66,7 +70,13 @@ import { CommentItemComponent } from './comments/comment-item/comment-item.compo
     FaqListComponent,
     UserCardComponent,
     CommentCreateComponent,
-    CommentItemComponent
+    CommentItemComponent,
+    AdminListComponent,
+    DeveloperFormComponent,
+    FaqFormComponent,
+    GameFormComponent,
+    NoteFormComponent,
+    GameListComponent
   ],
     imports: [
         BrowserModule,
@@ -75,7 +85,10 @@ import { CommentItemComponent } from './comments/comment-item/comment-item.compo
         FormsModule,
         ReactiveFormsModule,
     ],
-  providers: [],
+  providers: [
+    Game,
+    Developer
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

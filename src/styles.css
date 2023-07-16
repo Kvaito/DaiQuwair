@@ -148,16 +148,24 @@ a:active, a:hover, a {
 }
 
 .buttonIcon{
-
   color: white;
   background-color: transparent;
   margin-right: 10px;
+  max-width: 100%;
+  height: 30px;
+  aspect-ratio: 1/1;
 }
 .buttonIcon:hover{
   cursor: pointer;
   color: black;
-  background-color: white;
-
+  /*background-color: white;*/
+}
+.edit{
+  background-image: url("assets/icons/edit.png");
+  background-size: 100%;
+}
+.edit:hover{
+  background-image: url("assets/icons/edit_active.png");
 }
 /*IMAGES*/
 .avatar {
@@ -272,6 +280,10 @@ option{
 }
 option:hover{
   background-color: #5bb671;
+}
+.form__cover{
+  height: 200px;
+  max-width: 500px;
 }
 /*use with span tag, class fix with label*/
 .inputFile input[type=file] {

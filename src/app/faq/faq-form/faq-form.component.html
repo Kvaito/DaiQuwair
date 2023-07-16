@@ -14,16 +14,20 @@
         Раздел вопросов
         <div>
           <select [(ngModel)]="FAQuestion.section" name="position">
-            <option *ngFor="let section of sections" [ngValue]="section">{{section.name}}</option>
+            <option *ngFor="let section of sections" [value]="section">{{section.name}}</option>
           </select>
         </div>
-
       </li>
       <li>
-        Ответ
-        <div id="editor-js" class="infoBlock"></div>
+        <label>
+          Ответ
+          <div>
+            <input type="text" name="answer" [(ngModel)]="FAQuestion.answer">
+          </div>
+        </label>
       </li>
     </ul>
-    <div class="button buttonTransparent" (click)="addFAQ()">Добавить пункт FAQ</div>
+    <div class="button buttonTransparent" (click)="addFAQ()"><div>Добавить ответ</div></div>
   </form>
 </div>
+

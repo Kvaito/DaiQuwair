@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FireService} from "../../services/fire.service";
+import {Developer} from "../../../models/Developer";
 
 @Component({
   selector: 'app-comment-item',
@@ -22,13 +23,7 @@ export class CommentItemComponent implements OnInit {
       author:''
     }
   }
-  authorDevData={
-    name: '',
-    surname: '',
-    position: {name: '', systemName: ''},
-    avatarUrl:'',
-    avatarPath:''
-  }
+  authorDevData!: Developer;
   commentIsReady=false
   ngOnInit(): void {
     if(this.comment.author.isDev){

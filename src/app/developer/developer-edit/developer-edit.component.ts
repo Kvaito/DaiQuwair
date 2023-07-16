@@ -3,6 +3,7 @@ import {FireService} from "../../services/fire.service";
 import {getDownloadURL} from "firebase/storage";
 import {getStorage, ref as storageRef} from "@angular/fire/storage";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
+import {Developer} from "../../../models/Developer";
 
 @Component({
   selector: 'app-developer-edit',
@@ -12,17 +13,12 @@ import {AngularFireStorage} from "@angular/fire/compat/storage";
 export class DeveloperEditComponent implements OnInit {
 
   constructor(private fire:FireService,private FireStorage: AngularFireStorage) { }
-  userData:any={
-    name:'',
-    nickname:'',
-    surname:'',
-    password:'',
-    avatarPath:''
-  }
+  userData:any
     oldAvatarPath:string=''
     repeatPassword:string=''
     imageData:any={}
     message:string=''
+  avatarUrl:string=''
   ngOnInit(): void {
     this.userData=this.fire.userData
     this.oldAvatarPath=this.userData.avatarPath
@@ -35,7 +31,7 @@ export class DeveloperEditComponent implements OnInit {
     this.imageData.cloudPath = "/avatars/" + this.fire.userData.id + "/" + Math.random()
     //Загрузка картинки
     this.FireStorage.upload(this.imageData.cloudPath, this.imageData.localPath).then( async () => {
-      this.fire.userData.avatarUrl = await getDownloadURL(storageRef(getStorage(), this.imageData.cloudPath))
+      this.avatarUrl = await getDownloadURL(storageRef(getStorage(), this.imageData.cloudPath))
       this.imageData.imageUploaded=true
       this.userData.avatarPath=this.imageData.cloudPath
     })

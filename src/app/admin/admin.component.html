@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="isAdmin">
   <div class="actionPanel">
     <div class="buttonSection">
       <div class="sectionTitle">Пользователи</div>
@@ -6,12 +6,13 @@
     </div>
     <div class="buttonSection">
       <div class="sectionTitle">FAQ</div>
-      <div class="button buttonTransparent" (click)="isFAQAdding=!isFAQAdding">Добавить ответ FAQ</div>
+      <div class="button buttonTransparent" (click)="addFAQ()">Добавить ответ FAQ</div>
       <app-faq-list></app-faq-list>
     </div>
     <div class="buttonSection">
       <div class="sectionTitle">Игры</div>
-      <div class="button buttonTransparent" (click)="isGamesAdding=!isGamesAdding">Добавление игры</div>
+      <div class="button buttonTransparent" (click)="addGame()">Добавление игры</div>
+      <app-game-list></app-game-list>
     </div>
     <div class="buttonSection">
       <div class="sectionTitle">Вакансии</div>
@@ -23,18 +24,7 @@
       <div class="button buttonTransparent" (click)="isTagEditing=!isTagEditing">Управление активными тегами</div>
     </div>
   </div>
-  <div>
-    <div class="button buttonTransparent" (click)="addPoint()">Добавить пункт</div>
-    <div *ngIf="road.roadmapIsReady">
-      <app-pointlist (startEdit)="isPointAdding=true"></app-pointlist>
-    </div>
-  </div>
   <div class="forms_block">
-    <div *ngIf="isGamesAdding">
-      <app-add-game></app-add-game>
-    </div>
-    <!--    <button (click)="isGamesEditing=true">Редактировать</button>-->
-    <br>
     <!--    Добавление должности-->
     <div *ngIf="isAddingPosition">
       <div><span>Все должности</span>
@@ -169,13 +159,23 @@
 
       </form>
     </div>
+    <!--    FAQ управление-->
+    <div *ngIf=getFaqFormInfo()>
+      <app-faq-form></app-faq-form>
+    </div>
+    <div *ngIf="getGameFormInfo()">
+      <app-game-form></app-game-form>
+    </div>
+  </div>
+  <div>
+    <div class="button buttonTransparent" (click)="addPoint()">Добавить пункт</div>
+    <div *ngIf="road.roadmapIsReady">
+      <app-pointlist (startEdit)="isPointAdding=true"></app-pointlist>
+    </div>
     <!--    Создание пункта роадмап-->
     <div class="manageBlock" *ngIf="isPointAdding">
       <app-add-roadpoint></app-add-roadpoint>
     </div>
-    <!--    FAQ управление-->
-    <div *ngIf="isFAQAdding">
-      <app-faq-add></app-faq-add>
-    </div>
   </div>
+
 </div>

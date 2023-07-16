@@ -31,7 +31,7 @@ export class DeveloperComponent implements OnInit {
   }
 
   async getAuthorNotes() {
-    await this.fire.getNotes('author_filter', this.fire.userData.id)
+    await this.fire.getNotes('author_filter',this.fire.userData.id.toString() )
     //If this developer have no notes yet, note list will not appear
     if (this.fire.notes!=undefined) {
       this.authorNotes = Object.values(this.fire.notes)
@@ -41,7 +41,7 @@ export class DeveloperComponent implements OnInit {
 
   async getUserAvatar(){
     if(this.fire.userData.avatarPath!=''&&this.fire.userData.avatarPath!=undefined){
-      this.fire.userData.avatarUrl = await getDownloadURL(storageRef(getStorage(), this.fire.userData.avatarPath))
+      this.avatarUrl = await getDownloadURL(storageRef(getStorage(), this.fire.userData.avatarPath))
     }
   }
 

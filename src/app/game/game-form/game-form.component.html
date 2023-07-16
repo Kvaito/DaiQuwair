@@ -27,11 +27,11 @@
         </label>
       </li>
       <li>
-        <div  *ngIf="coverUploaded"><img alt="gameCover" style="width: 200px;height: 200px" [src]=fire.actualImageDownloadUrl></div>
+        <div  *ngIf="coverUploaded"><img alt="gameCover" class="form__cover" [src]=this.coverUrl></div>
         <label class="inputFile">
-              <input type="file" (change)="uploadImage($event)" name="file" accept="*.png.jpg">
-              <span class="inputFile__button button buttonTransparent">Загрузить обложку</span>
-            </label>
+          <input type="file" (change)="uploadImage($event)" name="file" accept="*.png.jpg">
+          <span class="inputFile__button button buttonTransparent">Загрузить обложку</span>
+        </label>
       </li>
     </ul>
     <div class="button buttonTransparent" (click)="createGame()">Добавить игру</div>

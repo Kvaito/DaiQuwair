@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FireService} from "../../services/fire.service";
 import {FaqService} from "../../services/faq.service";
 
@@ -8,6 +8,7 @@ import {FaqService} from "../../services/faq.service";
   styleUrls: ['./faq-list.component.css']
 })
 export class FaqListComponent implements OnInit {
+  @Output() startEdit = new EventEmitter()
 
   constructor(private fire: FireService,public faq:FaqService) { }
   FAQ = [[{
@@ -24,4 +25,9 @@ export class FaqListComponent implements OnInit {
 
   }
 
+  edit(question: any){
+    this.faq.formInfo.status=true
+    this.faq.formInfo.action='edit'
+    this.faq.selectedQuestion=question
+  }
 }

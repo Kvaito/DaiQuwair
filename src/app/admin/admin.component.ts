@@ -4,6 +4,8 @@ import {AuthService} from "../services/auth.service";
 import {getDatabase, ref} from "firebase/database";
 import {push, set} from "@angular/fire/database";
 import {RoadmapService} from "../services/roadmap.service";
+import {FaqService} from "../services/faq.service";
+import {GameService} from "../services/game.service";
 
 @Component({
   selector: 'app-admin',
@@ -12,16 +14,14 @@ import {RoadmapService} from "../services/roadmap.service";
 })
 export class AdminComponent implements OnInit {
 
-  constructor(public fire:FireService,private auth:AuthService,public road:RoadmapService) { }
+  constructor(public fire:FireService,private auth:AuthService,
+              public road:RoadmapService,private faq:FaqService,private game:GameService) { }
 
   isCreatingUser:boolean=false
   isAddingPosition:boolean=false
   isTagEditing:boolean=false
-  isGamesAdding: boolean=false;
-  isGamesEditing: boolean=false;
   isCareerEditing:boolean=false
   isPointAdding:boolean=false;
-  isFAQAdding:boolean=false;
 
   newUser:any={
     nickname:'',
@@ -37,7 +37,6 @@ export class AdminComponent implements OnInit {
     positionName:'',
     systemName:''
   }
-
   newCareer:any={
     section:'',
     name:'',
@@ -51,13 +50,11 @@ export class AdminComponent implements OnInit {
   roles:Array<any>=Object.values(this.fire.systemData.roles)
   careerSections:Array<any>=Object.values(this.fire.systemData.career)
 
-
   ngOnInit(): void {
     this.road.getRoadmap()
   }
 
   addPosition(){
-    console.log(this.newPosition.systemName)
     //валидация
     let english = /^[A-Za-z0-9]*$/
     if(!english.test(this.newPosition.systemName)){
@@ -68,10 +65,29 @@ export class AdminComponent implements OnInit {
     }
   }
 
+ isAdmin(){
+    return true
+ }
+
   createUser(){
     this.auth.createUser(this.newUser)
   }
 
+  addFAQ(){
+    this.faq.formInfo.status=true
+    this.faq.formInfo.action='add'
+  }
+  getFaqFormInfo(){
+    return this.faq.formInfo.status
+  }
+  addGame(){
+    this.game.formInfo.status=true
+    this.game.formInfo.action='add'
+  }
+
+  getGameFormInfo(){
+    return this.game.formInfo.status
+  }
   addPoint(){
     this.isPointAdding=true;
     this.road.selectedPoint={

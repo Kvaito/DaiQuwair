@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {Router} from "@angular/router";
 import {child, get, getDatabase, ref, update} from "firebase/database";
 import {push, remove, set} from "@angular/fire/database";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {getStorage, ref as storageRef, getDownloadURL} from "firebase/storage";
 import {AuthService} from "./auth.service";
+import {Developer} from "../../models/Developer";
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +15,6 @@ export class FireService {
   dbRef=ref(this.db)
   systemData:any={}
   siteIsReady:boolean=false
-  userData:any= {
-    role:{
-      role_id:0
-    }
-  }
   selectedDev:any={}
   notes:any
   comments:any
@@ -28,8 +24,10 @@ export class FireService {
   storage=getStorage()
   team:any;
   actualImageDownloadUrl:string=''
+  public userData:any
 
-  constructor(private router: Router, private FireStorage: AngularFireStorage) { }
+  constructor(private router: Router, private FireStorage: AngularFireStorage) {
+  }
 
   //Должности
   async addPosition(newPosition:any) {
@@ -209,12 +207,6 @@ export class FireService {
       })
   }
 
-  //Games
-  async createGame(game:any) {
-    //обработка жанров
-    await set(ref(this.db, 'system/games/' + game.systemName + '/'), game);
-    console.log('Игра добавлена')
-  }
 
   //Helpful tools
   async uploadImage(localPath: string,firePath:string) {

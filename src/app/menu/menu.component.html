@@ -1,11 +1,11 @@
 <div class="menu">
-  <div class="menu_item"><a href="" style="padding-left: 10px;">
+  <div class="menu_item"><a routerLink="" style="padding-left: 10px;">
     <img class="menu_img" src="/assets/site_images/dq_logo.png" alt="dq_logo"><img class="menu_img menu_title" src="/assets/site_images/dq_title.png" alt="dq_title">
   </a></div>
-  <div class="menu_item"><a href="/news">Новости</a></div>
-  <div class="menu_item"><a href="/games">Игры</a></div>
-  <div class="menu_item"><a href="/careers">Вакансии</a></div>
-  <div class="menu_item"><a href="/faq">FAQ</a></div>
-  <div class="menu_item" *ngIf="fire.userData.role.role_id!==0"><a href="/developer">Разработчику</a></div>
-  <div class="menu_item" *ngIf="fire.userData.role.role_id==2"><a href="/admin">Админ-панель</a></div>
+  <div class="menu_item"><a routerLink="/news">Новости</a></div>
+  <div class="menu_item"><a routerLink="/games">Игры</a></div>
+  <div class="menu_item"><a routerLink="/careers">Вакансии</a></div>
+  <div class="menu_item"><a routerLink="/faq">FAQ</a></div>
+  <div class="menu_item" *ngIf="fire.userData.role.role_id!==0"><a routerLink="/developer">Разработчику</a></div>
+  <div class="menu_item" *ngIf="fire.userData.role.role_id==2"><a routerLink="/admin">Админ-панель</a></div>
 </div>
